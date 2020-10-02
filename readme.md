@@ -1,7 +1,8 @@
-#RistoManager
-a project by
+# RistoManager
 
-*Ambrosio Salvatore
-*Benitozzi Simone
-*Costante Marco
-*Nappo Carlo Alessia
+a project by:
+
+- Ambrosio Salvatore
+- Benitozzi Simone
+- Costante Marco
+- Nappo Carlo Alessia
