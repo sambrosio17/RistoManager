@@ -202,6 +202,42 @@ public class ComandaDAO {
 		return list;
 
 	}
+	
+	public List<ComandaBean> retrieveNonCompletate() throws SQLException{
+
+		System.out.println("entro");
+
+		List<ComandaBean> list=new ArrayList<ComandaBean>();
+
+		Connection conn=null;
+		PreparedStatement query=null;
+		String selectString="SELECT * FROM "+COMANDA+" WHERE completata = 0;";
+
+		try {
+
+			conn=ds.getConnection();
+			query=conn.prepareStatement(selectString);
+
+			ResultSet rs=query.executeQuery();
+
+			while(rs.next()) {
+				ComandaBean c=retrieveById(rs.getInt("id"));
+				list.add(c);
+			}
+
+		} finally {
+			try {
+				if (query != null)
+					query.close();
+			} finally {
+				if(conn!=null)
+					conn.close();
+			}
+		}
+
+		return list;
+
+	}
 
 	public List<ComandaBean> retrieveByCodiceTavolo(String codice) throws SQLException{
 
