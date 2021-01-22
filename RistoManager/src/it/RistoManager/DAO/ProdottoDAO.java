@@ -107,6 +107,7 @@ public class ProdottoDAO {
 			ResultSet rs=query.executeQuery();
 
 			if(rs.next()) {
+				
 
 				p=new ProdottoBean();
 
@@ -119,6 +120,7 @@ public class ProdottoDAO {
 				String[] ingredienti=rs.getString("ingredienti").split(",");
 				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
 				p.setIngredienti(ingredientiList);
+				
 
 			}
 
@@ -186,6 +188,157 @@ public class ProdottoDAO {
 
 	}
 
+	
+	public List<ProdottoBean> retrieveByCategory(String category) throws SQLException {
+
+		ProdottoBean p=null;
+		List<ProdottoBean> pList=new ArrayList<ProdottoBean>();
+
+		Connection conn=null;
+		PreparedStatement query=null;
+
+		String queryString="SELECT * FROM "+TABLE+" WHERE categoria=?;";
+
+		try {
+			conn = ds.getConnection();
+			query = conn.prepareStatement(queryString);
+			query.setString(1, category);
+
+
+			ResultSet rs=query.executeQuery();
+
+			while(rs.next()) {
+
+				p=new ProdottoBean();
+
+				p.setId(rs.getInt("id"));
+				p.setNomeprodotto(rs.getString("nomeprodotto"));
+				p.setDescrizione(rs.getString("descrizione"));
+				p.setPrezzo(rs.getFloat("prezzo"));
+				p.setImmagine(rs.getString("immagine"));
+				p.setCategoria(rs.getString("categoria"));
+				String[] ingredienti=rs.getString("ingredienti").split(",");
+				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				p.setIngredienti(ingredientiList);
+				pList.add(p);
+
+			}
+
+		} finally {
+			try {
+				if (query != null)
+					query.close();
+			} finally {
+				if(conn!=null)
+					conn.close();
+			}
+		}
+
+
+		return pList;
+
+	}
+	
+	
+	public List<ProdottoBean> retrieveByPrice(int min, int max) throws SQLException{
+		
+		ProdottoBean p=null;
+		List<ProdottoBean> pList=new ArrayList<ProdottoBean>();
+
+		Connection conn=null;
+		PreparedStatement query=null;
+
+		String queryString="SELECT * FROM "+TABLE+" WHERE prezzo BETWEEN ? AND ?;";
+
+		try {
+			conn = ds.getConnection();
+			query = conn.prepareStatement(queryString);
+			query.setInt(1, min);
+			query.setInt(1, max);
+
+			ResultSet rs=query.executeQuery();
+
+			while(rs.next()) {
+
+				p=new ProdottoBean();
+
+				p.setId(rs.getInt("id"));
+				p.setNomeprodotto(rs.getString("nomeprodotto"));
+				p.setDescrizione(rs.getString("descrizione"));
+				p.setPrezzo(rs.getFloat("prezzo"));
+				p.setImmagine(rs.getString("immagine"));
+				p.setCategoria(rs.getString("categoria"));
+				String[] ingredienti=rs.getString("ingredienti").split(",");
+				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				p.setIngredienti(ingredientiList);
+				pList.add(p);
+
+			}
+
+		} finally {
+			try {
+				if (query != null)
+					query.close();
+			} finally {
+				if(conn!=null)
+					conn.close();
+			}
+		}
+
+
+		return pList;
+
+		
+	}
+	
+	public List<ProdottoBean> retrieveByIngredient(String ingrediente) throws SQLException{
+		
+		ProdottoBean p=null;
+		List<ProdottoBean> pList=new ArrayList<ProdottoBean>();
+
+		Connection conn=null;
+		PreparedStatement query=null;
+
+		String queryString="SELECT * FROM "+TABLE+" WHERE prezzo ?;";
+
+		try {
+			conn = ds.getConnection();
+			query = conn.prepareStatement(queryString);
+			query.setString(1, "%"+ingrediente+"%");
+
+			ResultSet rs=query.executeQuery();
+
+			while(rs.next()) {
+
+				p=new ProdottoBean();
+
+				p.setId(rs.getInt("id"));
+				p.setNomeprodotto(rs.getString("nomeprodotto"));
+				p.setDescrizione(rs.getString("descrizione"));
+				p.setPrezzo(rs.getFloat("prezzo"));
+				p.setImmagine(rs.getString("immagine"));
+				p.setCategoria(rs.getString("categoria"));
+				String[] ingredienti=rs.getString("ingredienti").split(",");
+				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				p.setIngredienti(ingredientiList);
+				pList.add(p);
+
+			}
+
+		} finally {
+			try {
+				if (query != null)
+					query.close();
+			} finally {
+				if(conn!=null)
+					conn.close();
+			}
+		}
+
+
+		return pList;
+		
+	}
 
 	public ProdottoBean update(int id, ProdottoBean p) throws SQLException {
 

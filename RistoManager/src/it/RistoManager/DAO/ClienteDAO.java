@@ -140,14 +140,16 @@ public class ClienteDAO {
 	}
 
 	//lista di client con email nella data in cui si effettua l'invocazione del metodo
-	public List<ClienteBean> retrievByEmail(String email) throws SQLException {
+	public List<ClienteBean> retrieveByEmail(String email) throws SQLException {
 
 		List<ClienteBean> clientiList= new ArrayList<ClienteBean>();
 
+		System.out.println("entro");
 		Connection conn=null;
 		PreparedStatement query=null;
 
 		String queryString="SELECT * FROM "+TABLE+" WHERE email LIKE ? AND data=?;";
+		
 
 		try {
 			conn = ds.getConnection();
@@ -155,11 +157,13 @@ public class ClienteDAO {
 
 			query.setString(1, email);
 			query.setDate(2, Date.valueOf(LocalDate.now()));
-
+			System.out.println(query.getFetchSize());
+			System.out.println(query);
 			ResultSet rs=query.executeQuery();
 
 			while(rs.next()) {
-
+				
+				System.out.println("entro");
 				ClienteBean c=new ClienteBean();
 
 				c.setId(rs.getInt("id"));
@@ -208,6 +212,8 @@ public class ClienteDAO {
 			ResultSet rs=query.executeQuery();
 
 			if(rs.next()) {
+				
+				System.out.println(codice +" sono dentro prendo i dati");
 
 				c=new ClienteBean();
 

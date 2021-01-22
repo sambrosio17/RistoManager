@@ -1,9 +1,10 @@
 package it.RistoManager.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProdottoBean {
+public class ProdottoBean implements Serializable {
 	
 	private int id;
 	private String nomeprodotto;

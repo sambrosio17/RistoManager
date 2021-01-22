@@ -283,7 +283,7 @@ public class ComandaDAO {
 		PreparedStatement query=null;
 		int result=0;
 
-		String queryString="UPDATE "+COMANDA+" SET totale=?, cliente=?, riepilogo=?, completata=? WHERE id=?;";
+		String queryString="UPDATE "+COMANDA+" SET totale=?, cliente=?, completata=? WHERE id=?;";
 
 		try {
 
