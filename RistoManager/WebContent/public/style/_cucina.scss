@@ -1,0 +1,95 @@
+.cucina {
+  justify-content: center;
+}
+
+.comanda_container {
+  .container_row {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+}
+
+.single_comanda {
+  margin: 1em;
+  padding: 1em;
+  width: 25%;
+  height: fit-content;
+
+  h2 {
+    text-align: center;
+    color: $secondary-color;
+  }
+
+  background-color: #ccc;
+  ul {
+    margin: 0.5em;
+    list-style-type: none;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  li:first-of-type {
+    color: red;
+  }
+  li:first-of-type:hover {
+    cursor: none;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+
+  .buttons {
+    margin-top: 3em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: white;
+      font-weight: bold;
+      font-size: 1.3em;
+      background-color: black;
+      padding: 0.3em;
+      text-align: center;
+    }
+    a.dettaglio {
+      background-color: $secondary-color;
+      transition: 0.5s ease-out;
+    }
+    a.dettaglio:hover {
+      background-color: $primary-color;
+      transition: 0.5s ease-out;
+    }
+
+    a.termina {
+      background-color: rgb(168, 0, 0);
+      transition: 0.5s ease-out;
+    }
+    a.termina:hover {
+      background-color: red;
+      transition: 0.5s ease-out;
+    }
+  }
+}
+
+.dettaglio_comanda {
+  width: 100%;
+  margin: 0 auto;
+  .single_comanda {
+    width: 50%;
+    margin: 1em auto;
+  }
+  li {
+    font-size: 1.5em;
+  }
+  .buttons {
+    justify-content: flex-end;
+  }
+}

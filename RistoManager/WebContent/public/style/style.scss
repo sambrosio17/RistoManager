@@ -1,0 +1,74 @@
+$bg-color: #def2f1;
+$text-color-primary: #000;
+$text-color-secondary: #fff;
+$primary-color: #3aafa9;
+$secondary-color: #0a5e7c;
+$even-row: #c5e6e4;
+$odd-row: #a7e8e4;
+
+// $primary-color: #ff5e5b;
+// $secondary-color: #1982c4;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.53);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.53);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $primary-color;
+
+  border-radius: 30px;
+}
+
+body {
+  background-color: $bg-color;
+  font-family: sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.title_container {
+  width: fit-content;
+  margin: 0 auto;
+  .logo_title {
+    color: $primary-color;
+    text-shadow: #fff 3px 3px 0px;
+    font-size: 3em;
+    margin-bottom: 0;
+  }
+  .logo_subtitle {
+    color: $secondary-color;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: #fff 3px 3px 0px;
+    margin-top: -0.5em;
+  }
+}
+
+.main-container {
+  width: 90%;
+  margin: 1em auto;
+  height: 100vh;
+}
+
+@import "_home.scss";
+@import "_prenotazione.scss";
+@import "_menu.scss";
+@import "_comanda.scss";
+@import "_cucina.scss";
+@import "_manager.scss";

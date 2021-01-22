@@ -5,6 +5,10 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
     http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
+	<error-page>
+<error-code>404</error-code>
+<location>/404.jsp</location>
+</error-page>
 	<resource-ref>
 		<description>
 		Riferimento JNDI ad una data source
@@ -38,7 +42,7 @@
 
 	<filter>
 		<filter-name>GestioneFilter</filter-name>
-		<filter-class>it.RistoManager.Control.GestioneFilter</filter-class>
+		<filter-class>it.RistoManager.Control.Gestione.GestioneFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>GestioneFilter</filter-name>
@@ -47,7 +51,7 @@
 
 	<filter>
 		<filter-name>SalaFilter</filter-name>
-		<filter-class>it.RistoManager.Control.SalaFilter</filter-class>
+		<filter-class>it.RistoManager.Control.Sala.SalaFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SalaFilter</filter-name>
@@ -56,7 +60,7 @@
 	
 	<filter>
 		<filter-name>CucinaFilter</filter-name>
-		<filter-class>it.RistoManager.Control.CucinaFilter</filter-class>
+		<filter-class>it.RistoManager.Control.Cucina.CucinaFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>CucinaFilter</filter-name>

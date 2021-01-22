@@ -1,0 +1,93 @@
+.prenotazione_container {
+  width: 90%;
+  margin: 0 auto;
+
+  .upper_section {
+    margin: 3em auto;
+    text-align: center;
+    h1 {
+      font-size: 2.2em;
+      color: $primary-color;
+      text-shadow: $secondary-color 1px 1px 0px;
+    }
+
+    p {
+      font-size: 1em;
+      margin-top: -1em;
+    }
+  }
+
+  .form_container {
+    width: 90%;
+    margin: 0 auto;
+
+    .checkbox {
+      margin-top: 1em;
+    }
+
+    form {
+      width: fit-content;
+      margin: 0 auto;
+    }
+    .single_field {
+      margin-top: 1em;
+      label {
+        font-size: 1.3em;
+        font-weight: bold;
+        margin: 0 auto;
+        color: $secondary-color;
+      }
+      input {
+        display: block;
+        width: 25em;
+        padding: 0.5em;
+        border-radius: 30px;
+        text-align: center;
+        border: none;
+        background-color: $primary-color;
+        color: white;
+        font-size: 1em;
+      }
+
+      input:focus {
+        transition: 0.5s ease;
+        border: 2px solid $secondary-color;
+      }
+    }
+    .single_field_last {
+      margin-top: 1em;
+      text-align: center;
+      label {
+        font-size: 1em;
+        font-weight: 400;
+        color: $secondary-color;
+      }
+      input {
+        display: inline;
+        width: auto;
+        padding: 0;
+      }
+    }
+
+    button {
+      margin: 2em auto;
+      display: block;
+      padding: 1em;
+      font-weight: bold;
+      font-size: 1.3em;
+      width: 10em;
+      border: none;
+      background-color: $primary-color;
+      color: #fff;
+      transition: 0.5s ease;
+      text-decoration: none;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    button:hover {
+      background-color: $secondary-color;
+      transition: 0.5s ease;
+      cursor: pointer;
+    }
+  }
+}

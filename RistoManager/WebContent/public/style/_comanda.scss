@@ -1,0 +1,126 @@
+.category_container {
+  h3 {
+    color: $primary-color;
+    text-align: center;
+  }
+}
+
+.title_in_comanda {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  i {
+    color: white;
+    font-size: 1.5em;
+    transition: 0.5s ease;
+  }
+  i:hover {
+    color: red;
+  }
+}
+
+.totale_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 3%;
+  padding-right: 3%;
+  margin-top: 2em;
+  margin: 0 auto;
+  height: 8vh;
+  background-color: $secondary-color;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+
+  span {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+
+  a {
+    text-decoration: none;
+    background-color: $primary-color;
+    color: white;
+    padding: 0.5em;
+    width: 12em;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    transition: 0.5s ease-out;
+  }
+
+  a:hover {
+    cursor: pointer;
+    color: $secondary-color;
+    transition: 0.5s ease-in;
+  }
+}
+
+.inner_comanda {
+  height: 75vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.sp_comanda:last-child {
+  margin-bottom: 8vh;
+}
+
+.product_details {
+  opacity: 100%;
+  i {
+    text-align: right;
+    display: block;
+    width: fit-content;
+    color: white;
+    transition: 0.5s ease-out;
+  }
+
+  i:hover {
+    transition: 0.5s ease-out;
+    color: red;
+    cursor: pointer;
+  }
+  background-color: $secondary-color;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 10px;
+  transition: 0.5s all ease;
+
+  h2,
+  h3 {
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    opacity: 0%;
+    transition: 1s all ease;
+  }
+
+  h2 {
+    justify-items: center;
+    color: $primary-color;
+  }
+
+  ol {
+    margin-top: 1em;
+    list-style-type: none;
+    margin: 0 auto;
+    text-align: center;
+    height: 170px;
+    overflow-y: scroll;
+    opacity: 0%;
+    transition: 1s all ease;
+    li {
+      color: white;
+    }
+  }
+}

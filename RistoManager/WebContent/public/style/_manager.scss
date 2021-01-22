@@ -1,0 +1,224 @@
+.subheader {
+  padding: 1em;
+  background-color: $secondary-color;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 5vh;
+  a {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    transition: 0.5s ease;
+  }
+  a:hover {
+    text-decoration: underline;
+    transition: 0.5s ease;
+  }
+}
+
+.products_table {
+  width: 95%;
+  margin: 1em auto;
+  text-align: center;
+  border-collapse: collapse;
+  th {
+    color: white;
+    background-color: $secondary-color;
+  }
+  tr {
+    padding: 1em;
+  }
+  tr:nth-child(even) {
+    background-color: $even-row;
+  }
+  tr:nth-child(odd) {
+    background-color: $odd-row;
+  }
+  td {
+    padding: 1em;
+  }
+
+  td.action {
+    display: flex;
+    justify-content: space-around;
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    a:hover {
+      color: $secondary-color;
+    }
+    a:first-of-type:hover {
+      color: red;
+    }
+  }
+}
+
+.product_form {
+  margin: 1em auto;
+  width: 50%;
+  text-align: center;
+  .single_input {
+    margin: 1em;
+    label {
+      display: block;
+      font-weight: bold;
+      font-size: 1em;
+      text-transform: uppercase;
+      color: $secondary-color;
+    }
+
+    option,
+    select {
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea {
+      padding: 0.5em;
+      width: 50%;
+    }
+  }
+
+  button {
+    padding: 0.5em;
+    text-align: center;
+    margin: 0 auto;
+    border: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    background-color: $primary-color;
+    text-transform: uppercase;
+    transition: 0.5s ease;
+  }
+
+  button:hover {
+    background-color: $secondary-color;
+    cursor: pointer;
+    transition: 0.5s ease;
+  }
+}
+
+.form_error {
+  border: 1px solid red;
+}
+
+.dateForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0.5em auto;
+
+  .single_date_input {
+    margin: 0.5em;
+
+    label {
+      font-weight: bold;
+      font-size: 1em;
+      text-transform: uppercase;
+      color: $secondary-color;
+    }
+
+    button {
+      padding: 0.5em;
+      text-align: center;
+      margin: 0 auto;
+      border: none;
+      font-weight: bold;
+      color: white;
+      background-color: $primary-color;
+      text-transform: uppercase;
+      transition: 0.5s ease;
+    }
+
+    button:hover {
+      background-color: $secondary-color;
+      cursor: pointer;
+      transition: 0.5s ease;
+    }
+  }
+}
+
+.login_form {
+  width: 30%;
+  height: 50%;
+  padding: 50px;
+  background-color: #ccc;
+  margin: 10em auto;
+  border-radius: 30px;
+  .single_login_input {
+    margin: 0.5em;
+    label {
+      font-weight: bold;
+      font-size: 1em;
+      text-transform: uppercase;
+      color: $secondary-color;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5em;
+      background-color: $primary-color;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 1em;
+    }
+  }
+
+  button {
+    margin: 1em auto 0 auto;
+    padding: 1em;
+    text-align: center;
+    font-size: 1.2em;
+    display: block;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: $primary-color;
+    text-transform: uppercase;
+    transition: 0.5s ease;
+    border-radius: 30px;
+  }
+
+  button:hover {
+    background-color: $secondary-color;
+    cursor: pointer;
+    transition: 0.5s ease;
+  }
+}
+
+.codice_container {
+  width: 90%;
+  margin: 1em auto 0 auto;
+  text-align: center;
+
+  a {
+    margin: 1em auto 0 auto;
+    padding: 1em;
+    text-align: center;
+    width: 10em;
+    font-size: 1.2em;
+    display: block;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: $primary-color;
+    text-transform: uppercase;
+    transition: 0.5s ease;
+    border-radius: 30px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: $secondary-color;
+    cursor: pointer;
+    transition: 0.5s ease;
+  }
+}
