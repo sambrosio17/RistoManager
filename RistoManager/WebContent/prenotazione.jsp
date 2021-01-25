@@ -46,7 +46,7 @@
                      </div>
                      <div class="single_field">
                         <label for="ora">Ora</label>
-                        <input name="ora" type="time" step="600"required>
+                        <input name="ora" type="time" min="12:00" max="23:00" step="600" required>
                      </div>
                      <div class="single_field">
                         <label for="numPosti">Numero Posti</label>
