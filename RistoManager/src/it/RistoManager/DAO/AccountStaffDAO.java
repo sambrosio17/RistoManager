@@ -1,6 +1,7 @@
 package it.RistoManager.DAO;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,13 +14,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.tomcat.dbcp.dbcp2.DriverManagerConnectionFactory;
+
 import it.RistoManager.Model.AccountStaffBean;
 import it.RistoManager.Model.AccountStaffBean.Ruolo;
 
-public class AccountStaffDAO{
+public class AccountStaffDAO {
 
-
-	public static final String TABLE="accountstaff";
+	public static final String TABLE = "accountstaff";
 
 	static DataSource ds;
 
@@ -35,20 +37,20 @@ public class AccountStaffDAO{
 		}
 	}
 
+	public AccountStaffBean create(AccountStaffBean staff) throws SQLException {
 
-	public AccountStaffBean create(AccountStaffBean  staff) throws SQLException {
+//		Connection conn=null;
+//		PreparedStatement query=null;
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "INSERT INTO " + TABLE + " (email, nome, cognome, password, ruolo) VALUES (?,?,?,?,?);";
 
-		String queryString="INSERT INTO "+TABLE+" (email, nome, cognome, password, ruolo) VALUES (?,?,?,?,?);";
+		int result = 0;
+		int id = -1;
 
-		int result=0;
-		int id=-1;
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
+//			conn = ds.getConnection();
+//			query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);
 
 			query.setString(1, staff.getEmail());
 			query.setString(2, staff.getNome());
@@ -56,49 +58,36 @@ public class AccountStaffDAO{
 			query.setString(4, staff.getPassword());
 			query.setString(5, staff.getRuolo().name());
 
-			result=query.executeUpdate();
+			result = query.executeUpdate();
 
-			ResultSet rs=query.getGeneratedKeys();
+			ResultSet rs = query.getGeneratedKeys();
 
-			if(rs.next())
-				id=rs.getInt(1);
+			if (rs.next())
+				id = rs.getInt(1);
 
 			staff.setId(id);
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
-
 		return (result == 1 ? staff : null);
 	}
 
 	public AccountStaffBean retrieveById(int id) throws SQLException {
 
-		AccountStaffBean staff= null;
+		AccountStaffBean staff = null;
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + " WHERE id=?;";
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE id=?;";
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
-
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString);) {
+			
+			
 			query.setInt(1, id);
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 
-				staff=new AccountStaffBean();
+				staff = new AccountStaffBean();
 				staff.setId(id);
 				staff.setEmail(rs.getString("email"));
 				staff.setNome(rs.getString("nome"));
@@ -107,41 +96,27 @@ public class AccountStaffDAO{
 				staff.setRuolo(Ruolo.valueOf(rs.getString("ruolo")));
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
-
-
+		
 		return staff;
 	}
 
-	public AccountStaffBean  retrieveByEmail(String email) throws SQLException {
+	public AccountStaffBean retrieveByEmail(String email) throws SQLException {
 
-		AccountStaffBean staff= null;
+		AccountStaffBean staff = null;
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + " WHERE email=?;";
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE email=?;";
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
 			query.setString(1, email);
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 
-				staff=new AccountStaffBean();
+				staff = new AccountStaffBean();
 				staff.setId(rs.getInt("id"));
 				staff.setEmail(rs.getString("email"));
 				staff.setNome(rs.getString("nome"));
@@ -150,41 +125,26 @@ public class AccountStaffDAO{
 				staff.setRuolo(Ruolo.valueOf(rs.getString("ruolo")));
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
-
 
 		return staff;
 	}
 
 	public List<AccountStaffBean> retrieveAll() throws SQLException {
 
-		List<AccountStaffBean>staffList=new ArrayList<AccountStaffBean>();
+		List<AccountStaffBean> staffList = new ArrayList<AccountStaffBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + ";";
 
-		String queryString="SELECT * FROM "+TABLE+";";
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+			ResultSet rs = query.executeQuery();
 
+			while (rs.next()) {
 
-			ResultSet rs=query.executeQuery();
-
-			while(rs.next()) {
-
-				AccountStaffBean staff=new AccountStaffBean();
-				staff=new AccountStaffBean();
+				AccountStaffBean staff = new AccountStaffBean();
+				staff = new AccountStaffBean();
 				staff.setId(rs.getInt("id"));
 				staff.setEmail(rs.getString("email"));
 				staff.setNome(rs.getString("nome"));
@@ -195,17 +155,7 @@ public class AccountStaffDAO{
 				staffList.add(staff);
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
-
 
 		return staffList;
 	}
@@ -213,18 +163,14 @@ public class AccountStaffDAO{
 	public AccountStaffBean update(int id, AccountStaffBean staff) throws SQLException {
 		// TODO Auto-generated method stub
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		int result = 0;
 
-		int result=0;
+		String queryString = "UPDATE " + TABLE + " SET email=?, nome=?, cognome=?, password=?, ruolo=? WHERE id=?;";
 
-		String queryString="UPDATE "+TABLE+" SET email=?, nome=?, cognome=?, password=?, ruolo=? WHERE id=?;";
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
-
-			if(retrieveById(id)!=null){
+			if (retrieveById(id) != null) {
 
 				query.setString(1, staff.getEmail());
 				query.setString(2, staff.getNome());
@@ -233,21 +179,12 @@ public class AccountStaffDAO{
 				query.setString(5, staff.getRuolo().name());
 				query.setInt(6, id);
 
-				result=query.executeUpdate();
-
+				result = query.executeUpdate();
 
 			}
-			
+
 			staff.setId(id);
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
 
 		return (result == 1 ? retrieveById(id) : null);
@@ -255,38 +192,24 @@ public class AccountStaffDAO{
 
 	public int delete(int id) throws SQLException {
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		int result = 0;
 
-		int result=0;
+		String queryString = "DELETE FROM " + TABLE + " WHERE id=?;";
 
-		String queryString="DELETE FROM "+TABLE+" WHERE id=?;";
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
-
-			if(retrieveById(id)!=null){
-
+			if (retrieveById(id) != null) {
 
 				query.setInt(1, id);
 
-				result=query.executeUpdate();
+				result = query.executeUpdate();
 
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
+		} 
 
 		return result;
-
 
 	}
 

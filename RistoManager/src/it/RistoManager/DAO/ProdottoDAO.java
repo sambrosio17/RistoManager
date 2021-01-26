@@ -14,13 +14,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-
 import it.RistoManager.Model.ProdottoBean;
 
 public class ProdottoDAO {
 
-
-	public static final String TABLE="prodotto";
+	public static final String TABLE = "prodotto";
 
 	static DataSource ds;
 
@@ -36,80 +34,60 @@ public class ProdottoDAO {
 		}
 	}
 
-
 	public ProdottoBean create(ProdottoBean p) throws SQLException {
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "INSERT INTO " + TABLE
+				+ " (nomeprodotto, prezzo, descrizione, immagine, ingredienti, categoria) VALUES (?,?,?,?,?,?);";
 
-		String queryString="INSERT INTO "+TABLE+" (nomeprodotto, prezzo, descrizione, immagine, ingredienti, categoria) VALUES (?,?,?,?,?,?);";
+		int result = 0;
+		int id = -1;
 
-		int result=0;
-		int id=-1;
+		try(Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);
 
 			query.setString(1, p.getNomeprodotto());
-			query.setFloat(2,p.getPrezzo());
+			query.setFloat(2, p.getPrezzo());
 			query.setString(3, p.getDescrizione());
 			query.setString(4, p.getImmagine());
-			String ingredienti="";
-			for(String s: p.getIngredienti())
-				ingredienti+=s+", ";
-			ingredienti=ingredienti.substring(0, ingredienti.length()-2);
+			String ingredienti = "";
+			for (String s : p.getIngredienti())
+				ingredienti += s + ", ";
+			ingredienti = ingredienti.substring(0, ingredienti.length() - 2);
 			query.setString(5, ingredienti);
 			query.setString(6, p.getCategoria());
 
+			result = query.executeUpdate();
 
-			result=query.executeUpdate();
+			ResultSet rs = query.getGeneratedKeys();
 
-			ResultSet rs=query.getGeneratedKeys();
-
-			if(rs.next())
-				id=rs.getInt(1);
+			if (rs.next())
+				id = rs.getInt(1);
 
 			p.setId(id);
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
+		} 
 
-
-
-		return result==1 ? p : null;
-
+		return result == 1 ? p : null;
 
 	}
 
 	public ProdottoBean retrieveById(int id) throws SQLException {
 
-		ProdottoBean p=null;
+		ProdottoBean p = null;
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + " WHERE id=?;";
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE id=?;";
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try(Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
 			query.setInt(1, id);
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			if(rs.next()) {
-				
+			if (rs.next()) {
 
-				p=new ProdottoBean();
+				p = new ProdottoBean();
 
 				p.setId(id);
 				p.setNomeprodotto(rs.getString("nomeprodotto"));
@@ -117,23 +95,12 @@ public class ProdottoDAO {
 				p.setPrezzo(rs.getFloat("prezzo"));
 				p.setImmagine(rs.getString("immagine"));
 				p.setCategoria(rs.getString("categoria"));
-				String[] ingredienti=rs.getString("ingredienti").split(",");
-				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				String[] ingredienti = rs.getString("ingredienti").split(",");
+				List<String> ingredientiList = new ArrayList<String>(Arrays.asList(ingredienti));
 				p.setIngredienti(ingredientiList);
-				
 
-			}
-
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
 			}
 		}
-
 
 		return p;
 
@@ -141,24 +108,19 @@ public class ProdottoDAO {
 
 	public List<ProdottoBean> retrieveAll() throws SQLException {
 
-		ProdottoBean p=null;
-		List<ProdottoBean> pList=new ArrayList<ProdottoBean>();
+		ProdottoBean p = null;
+		List<ProdottoBean> pList = new ArrayList<ProdottoBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + ";";
 
-		String queryString="SELECT * FROM "+TABLE+";";
+		try(Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+			ResultSet rs = query.executeQuery();
 
+			while (rs.next()) {
 
-			ResultSet rs=query.executeQuery();
-
-			while(rs.next()) {
-
-				p=new ProdottoBean();
+				p = new ProdottoBean();
 
 				p.setId(rs.getInt("id"));
 				p.setNomeprodotto(rs.getString("nomeprodotto"));
@@ -166,50 +128,36 @@ public class ProdottoDAO {
 				p.setPrezzo(rs.getFloat("prezzo"));
 				p.setImmagine(rs.getString("immagine"));
 				p.setCategoria(rs.getString("categoria"));
-				String[] ingredienti=rs.getString("ingredienti").split(",");
-				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				String[] ingredienti = rs.getString("ingredienti").split(",");
+				List<String> ingredientiList = new ArrayList<String>(Arrays.asList(ingredienti));
 				p.setIngredienti(ingredientiList);
 				pList.add(p);
 
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
-
+		} 
 
 		return pList;
 
 	}
 
-	
 	public List<ProdottoBean> retrieveByCategory(String category) throws SQLException {
 
-		ProdottoBean p=null;
-		List<ProdottoBean> pList=new ArrayList<ProdottoBean>();
+		ProdottoBean p = null;
+		List<ProdottoBean> pList = new ArrayList<ProdottoBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + " WHERE categoria=?;";
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE categoria=?;";
+		try(Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
 			query.setString(1, category);
 
+			ResultSet rs = query.executeQuery();
 
-			ResultSet rs=query.executeQuery();
+			while (rs.next()) {
 
-			while(rs.next()) {
-
-				p=new ProdottoBean();
+				p = new ProdottoBean();
 
 				p.setId(rs.getInt("id"));
 				p.setNomeprodotto(rs.getString("nomeprodotto"));
@@ -217,50 +165,37 @@ public class ProdottoDAO {
 				p.setPrezzo(rs.getFloat("prezzo"));
 				p.setImmagine(rs.getString("immagine"));
 				p.setCategoria(rs.getString("categoria"));
-				String[] ingredienti=rs.getString("ingredienti").split(",");
-				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				String[] ingredienti = rs.getString("ingredienti").split(",");
+				List<String> ingredientiList = new ArrayList<String>(Arrays.asList(ingredienti));
 				p.setIngredienti(ingredientiList);
 				pList.add(p);
 
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
-
+		} 
 
 		return pList;
 
 	}
-	
-	
-	public List<ProdottoBean> retrieveByPrice(int min, int max) throws SQLException{
-		
-		ProdottoBean p=null;
-		List<ProdottoBean> pList=new ArrayList<ProdottoBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+	public List<ProdottoBean> retrieveByPrice(int min, int max) throws SQLException {
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE prezzo BETWEEN ? AND ?;";
+		ProdottoBean p = null;
+		List<ProdottoBean> pList = new ArrayList<ProdottoBean>();
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		String queryString = "SELECT * FROM " + TABLE + " WHERE prezzo BETWEEN ? AND ?;";
+
+		try(Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
+
 			query.setInt(1, min);
 			query.setInt(1, max);
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				p=new ProdottoBean();
+				p = new ProdottoBean();
 
 				p.setId(rs.getInt("id"));
 				p.setNomeprodotto(rs.getString("nomeprodotto"));
@@ -268,49 +203,36 @@ public class ProdottoDAO {
 				p.setPrezzo(rs.getFloat("prezzo"));
 				p.setImmagine(rs.getString("immagine"));
 				p.setCategoria(rs.getString("categoria"));
-				String[] ingredienti=rs.getString("ingredienti").split(",");
-				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				String[] ingredienti = rs.getString("ingredienti").split(",");
+				List<String> ingredientiList = new ArrayList<String>(Arrays.asList(ingredienti));
 				p.setIngredienti(ingredientiList);
 				pList.add(p);
 
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
 
 		return pList;
 
-		
 	}
-	
-	public List<ProdottoBean> retrieveByIngredient(String ingrediente) throws SQLException{
-		
-		ProdottoBean p=null;
-		List<ProdottoBean> pList=new ArrayList<ProdottoBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+	public List<ProdottoBean> retrieveByIngredient(String ingrediente) throws SQLException {
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE prezzo ?;";
+		ProdottoBean p = null;
+		List<ProdottoBean> pList = new ArrayList<ProdottoBean>();
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
-			query.setString(1, "%"+ingrediente+"%");
+		String queryString = "SELECT * FROM " + TABLE + " WHERE prezzo ?;";
 
-			ResultSet rs=query.executeQuery();
+		try(Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-			while(rs.next()) {
+			query.setString(1, "%" + ingrediente + "%");
 
-				p=new ProdottoBean();
+			ResultSet rs = query.executeQuery();
+
+			while (rs.next()) {
+
+				p = new ProdottoBean();
 
 				p.setId(rs.getInt("id"));
 				p.setNomeprodotto(rs.getString("nomeprodotto"));
@@ -318,107 +240,67 @@ public class ProdottoDAO {
 				p.setPrezzo(rs.getFloat("prezzo"));
 				p.setImmagine(rs.getString("immagine"));
 				p.setCategoria(rs.getString("categoria"));
-				String[] ingredienti=rs.getString("ingredienti").split(",");
-				List<String> ingredientiList=new ArrayList<String>(Arrays.asList(ingredienti));
+				String[] ingredienti = rs.getString("ingredienti").split(",");
+				List<String> ingredientiList = new ArrayList<String>(Arrays.asList(ingredienti));
 				p.setIngredienti(ingredientiList);
 				pList.add(p);
 
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
-
 		return pList;
-		
+
 	}
 
 	public ProdottoBean update(int id, ProdottoBean p) throws SQLException {
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "UPDATE " + TABLE
+				+ " SET nomeprodotto=?, prezzo=?, descrizione=?, immagine=?, ingredienti=?, categoria=? WHERE id=?;";
 
-		String queryString="UPDATE "+TABLE+" SET nomeprodotto=?, prezzo=?, descrizione=?, immagine=?, ingredienti=?, categoria=? WHERE id=?;";
+		int result = 0;
 
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		int result=0;
-
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
-
-			if(retrieveById(id)!=null) {
+			if (retrieveById(id) != null) {
 				query.setString(1, p.getNomeprodotto());
-				query.setFloat(2,p.getPrezzo());
+				query.setFloat(2, p.getPrezzo());
 				query.setString(3, p.getDescrizione());
 				query.setString(4, p.getImmagine());
-				String ingredienti="";
-				for(String s: p.getIngredienti())
-					ingredienti+=s+", ";
-				ingredienti=ingredienti.substring(0, ingredienti.length()-2);
+				String ingredienti = "";
+				for (String s : p.getIngredienti())
+					ingredienti += s + ", ";
+				ingredienti = ingredienti.substring(0, ingredienti.length() - 2);
 				query.setString(5, ingredienti);
 				query.setString(6, p.getCategoria());
 				query.setInt(7, id);
 
-				result=query.executeUpdate();
+				result = query.executeUpdate();
 			}
 
 			p.setId(id);
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
 
-
-
-		return result==1 ? p : null;
+		return result == 1 ? p : null;
 
 	}
 
 	public int delete(int id) throws SQLException {
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "DELETE FROM " + TABLE + " WHERE id=?;";
 
-		String queryString="DELETE FROM "+TABLE+" WHERE id=?;";
+		int result = 0;
 
-		int result=0;
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
-
-			if(retrieveById(id)!=null) {
-				query.setInt(1,id);
-				result=query.executeUpdate();
+			if (retrieveById(id) != null) {
+				query.setInt(1, id);
+				result = query.executeUpdate();
 			}
 
-
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
-
 
 		return result;
 

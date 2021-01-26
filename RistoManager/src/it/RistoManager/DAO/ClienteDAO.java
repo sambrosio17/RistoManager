@@ -24,7 +24,7 @@ import it.RistoManager.Model.ClienteBean;
  */
 public class ClienteDAO {
 
-	public static final String TABLE="cliente";
+	public static final String TABLE = "cliente";
 
 	static DataSource ds;
 
@@ -40,20 +40,16 @@ public class ClienteDAO {
 		}
 	}
 
-
 	public ClienteBean create(ClienteBean c) throws SQLException {
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "INSERT INTO " + TABLE
+				+ " (email, nome, cognome, cellulare, numerodocumento, data, ora,numeroposti, codicetavolo) VALUES (?,?,?,?,?,?,?,?,?);";
 
-		String queryString="INSERT INTO "+TABLE+" (email, nome, cognome, cellulare, numerodocumento, data, ora,numeroposti, codicetavolo) VALUES (?,?,?,?,?,?,?,?,?);";
+		int result = 0;
+		int id = -1;
 
-		int result=0;
-		int id=-1;
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
 			query.setString(1, c.getEmail());
 			query.setString(2, c.getNome());
@@ -65,51 +61,37 @@ public class ClienteDAO {
 			query.setInt(8, c.getNumeroPosti());
 			query.setString(9, c.getCodiceTavolo());
 
-			result=query.executeUpdate();
+			result = query.executeUpdate();
 
-			ResultSet rs=query.getGeneratedKeys();
+			ResultSet rs = query.getGeneratedKeys();
 
-			if(rs.next())
-				id=rs.getInt(1);
+			if (rs.next())
+				id = rs.getInt(1);
 
 			c.setId(id);
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
 
-
-
-		return result==1 ? c : null;
+		return result == 1 ? c : null;
 
 	}
 
 	public ClienteBean retrieveById(int id) throws SQLException {
 
-		ClienteBean c=null;
+		ClienteBean c = null;
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + " WHERE id=?;";
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE id=?;";
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
 			query.setInt(1, id);
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 
-				c=new ClienteBean();
+				c = new ClienteBean();
 
 				c.setId(id);
 				c.setNome(rs.getString("nome"));
@@ -123,48 +105,35 @@ public class ClienteDAO {
 				c.setCodiceTavolo(rs.getString("codicetavolo"));
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
 
 		return c;
 
-
 	}
 
-	//lista di client con email nella data in cui si effettua l'invocazione del metodo
+	// lista di client con email nella data in cui si effettua l'invocazione del
+	// metodo
 	public List<ClienteBean> retrieveByEmail(String email) throws SQLException {
 
-		List<ClienteBean> clientiList= new ArrayList<ClienteBean>();
+		List<ClienteBean> clientiList = new ArrayList<ClienteBean>();
 
 		System.out.println("entro");
-		Connection conn=null;
-		PreparedStatement query=null;
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE email LIKE ? AND data=?;";
-		
+		String queryString = "SELECT * FROM " + TABLE + " WHERE email LIKE ? AND data=?;";
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
 			query.setString(1, email);
 			query.setDate(2, Date.valueOf(LocalDate.now()));
 			System.out.println(query.getFetchSize());
 			System.out.println(query);
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				System.out.println("entro");
-				ClienteBean c=new ClienteBean();
+				ClienteBean c = new ClienteBean();
 
 				c.setId(rs.getInt("id"));
 				c.setNome(rs.getString("nome"));
@@ -180,42 +149,29 @@ public class ClienteDAO {
 				clientiList.add(c);
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
 		return clientiList;
-
 
 	}
 
 	public ClienteBean retrieveByCodice(String codice) throws SQLException {
 
-		ClienteBean c=null;
+		ClienteBean c = null;
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + " WHERE codicetavolo=?;";
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE codicetavolo=?;";
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
 			query.setString(1, codice);
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			if(rs.next()) {
-				
-				System.out.println(codice +" sono dentro prendo i dati");
+			if (rs.next()) {
 
-				c=new ClienteBean();
+				System.out.println(codice + " sono dentro prendo i dati");
+
+				c = new ClienteBean();
 
 				c.setId(rs.getInt("id"));
 				c.setNome(rs.getString("nome"));
@@ -229,45 +185,32 @@ public class ClienteDAO {
 				c.setCodiceTavolo(rs.getString("codicetavolo"));
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
-
 
 		return c;
 
 	}
-	
-	
-	//lista di client con nome e cognome nella data in cui si effettua l'invocazione del metodo
+
+	// lista di client con nome e cognome nella data in cui si effettua
+	// l'invocazione del metodo
 	public List<ClienteBean> retrieveByNome(String nome, String cognome) throws SQLException {
 
-		List<ClienteBean> clientiList= new ArrayList<ClienteBean>();
+		List<ClienteBean> clientiList = new ArrayList<ClienteBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		String queryString = "SELECT * FROM " + TABLE + " WHERE nome LIKE ? AND cognome LIKE ? AND data=?;";
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE nome LIKE ? AND cognome LIKE ? AND data=?;";
-
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
 			query.setString(1, nome);
 			query.setString(2, cognome);
 			query.setDate(3, Date.valueOf(LocalDate.now()));
-			
-			ResultSet rs=query.executeQuery();
 
-			while(rs.next()) {
+			ResultSet rs = query.executeQuery();
 
-				ClienteBean c=new ClienteBean();
+			while (rs.next()) {
+
+				ClienteBean c = new ClienteBean();
 
 				c.setId(rs.getInt("id"));
 				c.setNome(rs.getString("nome"));
@@ -283,42 +226,34 @@ public class ClienteDAO {
 				clientiList.add(c);
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
 		return clientiList;
 
-
 	}
 
-	//lista di client con cellullare nella data in cui si effettua l'invocazione del metodo
+	// lista di client con cellullare nella data in cui si effettua l'invocazione
+	// del metodo
 	public List<ClienteBean> retrieveByCellulare(String cellulare) throws SQLException {
 
-		List<ClienteBean> clientiList= new ArrayList<ClienteBean>();
+		List<ClienteBean> clientiList = new ArrayList<ClienteBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		  
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE cellulare=? AND data=?;";
+		String queryString = "SELECT * FROM " + TABLE + " WHERE cellulare=? AND data=?;";
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		 try(Connection conn = DriverManagerConnectionPool.getConnection();
+			PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
+
+			 
 
 			query.setString(1, cellulare);
 			query.setDate(2, Date.valueOf(LocalDate.now()));
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				ClienteBean c=new ClienteBean();
+				ClienteBean c = new ClienteBean();
 
 				c.setId(rs.getInt("id"));
 				c.setNome(rs.getString("nome"));
@@ -334,41 +269,32 @@ public class ClienteDAO {
 				clientiList.add(c);
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
+		}  
 		return clientiList;
-
 
 	}
 
-	//lista di clienti nella data passata
+	// lista di clienti nella data passata
 	public List<ClienteBean> retrieveByDate(LocalDate data) throws SQLException {
 
-		List<ClienteBean> clientiList= new ArrayList<ClienteBean>();
+		List<ClienteBean> clientiList = new ArrayList<ClienteBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		  
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE data=?;";
+		String queryString = "SELECT * FROM " + TABLE + " WHERE data=?;";
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
+
+			 
 
 			query.setDate(1, Date.valueOf(data));
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				ClienteBean c=new ClienteBean();
+				ClienteBean c = new ClienteBean();
 
 				c.setId(rs.getInt("id"));
 				c.setNome(rs.getString("nome"));
@@ -384,41 +310,32 @@ public class ClienteDAO {
 				clientiList.add(c);
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
+		} 
 		return clientiList;
 
 	}
 
-
 	public List<ClienteBean> retrieveBetweenDates(LocalDate start, LocalDate end) throws SQLException {
 
-		List<ClienteBean> clientiList= new ArrayList<ClienteBean>();
+		List<ClienteBean> clientiList = new ArrayList<ClienteBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		  
 
-		String queryString="SELECT * FROM "+TABLE+" WHERE data BETWEEN ? AND ?;";
+		String queryString = "SELECT * FROM " + TABLE + " WHERE data BETWEEN ? AND ?;";
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
+
+			 
 
 			query.setDate(1, Date.valueOf(start));
 			query.setDate(2, Date.valueOf(end));
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				ClienteBean c=new ClienteBean();
+				ClienteBean c = new ClienteBean();
 
 				c.setId(rs.getInt("id"));
 				c.setNome(rs.getString("nome"));
@@ -434,39 +351,29 @@ public class ClienteDAO {
 				clientiList.add(c);
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
+		} 
 		return clientiList;
-
 
 	}
 
 	public List<ClienteBean> retrieveAll() throws SQLException {
 
-		List<ClienteBean> clientiList= new ArrayList<ClienteBean>();
+		List<ClienteBean> clientiList = new ArrayList<ClienteBean>();
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		  
 
-		String queryString="SELECT * FROM "+TABLE+";";
+		String queryString = "SELECT * FROM " + TABLE + ";";
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
+			 
 
-			ResultSet rs=query.executeQuery();
+			ResultSet rs = query.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				ClienteBean c=new ClienteBean();
+				ClienteBean c = new ClienteBean();
 
 				c.setId(rs.getInt("id"));
 				c.setNome(rs.getString("nome"));
@@ -482,35 +389,26 @@ public class ClienteDAO {
 				clientiList.add(c);
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
+		} 
 		return clientiList;
-
 
 	}
 
 	public ClienteBean update(int id, ClienteBean c) throws SQLException {
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		  
 
-		String queryString="UPDATE "+TABLE+" SET email=?, nome=?, cognome=?, cellulare=?, numerodocumento=?, data=?, ora=?, numeroposti=?, codicetavolo=? WHERE id=?;";
+		String queryString = "UPDATE " + TABLE
+				+ " SET email=?, nome=?, cognome=?, cellulare=?, numerodocumento=?, data=?, ora=?, numeroposti=?, codicetavolo=? WHERE id=?;";
 
-		int result=0;
+		int result = 0;
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-			if(retrieveById(id)!=null)
-			{
+			 
+
+			if (retrieveById(id) != null) {
 				query.setString(1, c.getEmail());
 				query.setString(2, c.getNome());
 				query.setString(3, c.getCognome());
@@ -520,63 +418,37 @@ public class ClienteDAO {
 				query.setTime(7, Time.valueOf(c.getOra()));
 				query.setInt(8, c.getNumeroPosti());
 				query.setString(9, c.getCodiceTavolo());
-				query.setInt(10,id);
+				query.setInt(10, id);
 
-				result=query.executeUpdate();
-				
-				
+				result = query.executeUpdate();
 
 			}
 			c.setId(id);
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
-		}
+		} 
 
-
-
-		return result==1 ? c : null;
-
-
+		return result == 1 ? c : null;
 
 	}
 
 	public int delete(int id) throws SQLException {
 
-		Connection conn=null;
-		PreparedStatement query=null;
+		int result = 0;
 
-		int result=0;
+		String queryString = "DELETE FROM " + TABLE + " WHERE id=?;";
 
-		String queryString="DELETE FROM "+TABLE+" WHERE id=?;";
+		try (Connection conn = DriverManagerConnectionPool.getConnection();
+				PreparedStatement query = conn.prepareStatement(queryString, Statement.RETURN_GENERATED_KEYS);) {
 
-		try {
-			conn = ds.getConnection();
-			query = conn.prepareStatement(queryString);
 
-			if(retrieveById(id)!=null){
+			if (retrieveById(id) != null) {
 				query.setInt(1, id);
-				result=query.executeUpdate();
+				result = query.executeUpdate();
 			}
 
-		} finally {
-			try {
-				if (query != null)
-					query.close();
-			} finally {
-				if(conn!=null)
-					conn.close();
-			}
 		}
 
 		return result;
 
 	}
 }
-
