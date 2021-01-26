@@ -1,3 +1,11 @@
+
+<%
+	String errorType = (String) session.getAttribute("errorType"); 
+	String error = (String) session.getAttribute("error");
+
+%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,18 +34,59 @@
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome"required>
                 </div>
+                <span class="formError" id="checkNomeProdotto">
+				<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("nome")){;
+				%>
+					<%=error %>
+			   <%} %>
+				</span>
+                
                 <div class="single_input">
                   <label for="foto">Immagine:</label>
                   <input type="text" name="foto"required class="form_error">
               </div>
+              <span class="formError" id="checkFotoProdotto">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("foto")){;
+			%>
+					<%=error %>
+			   <%} %>
+			  </span>
+              
                 <div class="single_input">
                     <label for="ingredienti">Ingredienti (separati da un virgola):</label>
                     <input type="text" name="ingredienti"required>
                 </div>
+                <span class="formError" id="checkIngredientiProdotto">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("ingredienti")){;
+			%>
+					<%=error %>
+			   <%} %>
+			  </span>
+                
                 <div class="single_input">
                     <label for="descrizione">Descrizione:</label>
                     <textarea name="descrizione" required rows="4" cols="50"></textarea>
                 </div>
+                <span class="formError" id="checkDescrizioneProdotto">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("descrizione")){;
+			%>
+					<%=error %>
+			   <%} %>
+				</span>
+                
+                
                 <div class="single_input">
                     <label for="categoria">Categoria:</label>
                     <select name="categoria" required>
@@ -49,11 +98,30 @@
                         <option value="pizza">Pizza</option>
                     </select>
                 </div>
+                <span class="formError" id="checkCategoriaProdotto">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("categoria")){;
+			%>
+					<%=error %>
+			   <%} %>
+				</span>
+                
                 <div class="single_input">
                     <label for="prezzo">Prezzo</label>
                     <input type="text" name="prezzo" required>
                 </div>
-
+                <span class="formError" id="checkPrezzoProdotto">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("prezzo")){;
+			%>
+					<%=error %>
+			   <%} %>
+				</span>
+                
                 <button type="submit">Aggiungi</button>
         </form>
     </div>

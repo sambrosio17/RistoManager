@@ -2,6 +2,10 @@
 <%ProdottoBean p= (ProdottoBean) request.getAttribute("prodotto");
 	if(p==null){
 	response.sendRedirect("./");}
+	
+	String errorType = (String) session.getAttribute("errorType"); 
+	String error = (String) session.getAttribute("error");
+
 	%>
 
 
@@ -34,18 +38,58 @@
                     <label for="nome">Nome:</label>
                     <input type="text" name="nome" placeholder="<%=p.getNomeprodotto()%>">
                 </div>
+                 <span class="formError" id="checkNomeProdottoModifica">
+				<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("nome")){;
+				%>
+					<%=error %>
+			   <%} %>
+				</span>
+				
                 <div class="single_input">
                   <label for="foto">Immagine:</label>
                   <input type="text" name="immagine" placeholder="<%=p.getImmagine()%>">
               </div>
+               <span class="formError" id="checkFotoProdottoModifica">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("foto")){;
+			%>
+					<%=error %>
+			   <%} %>
+			  </span>
+			  
                 <div class="single_input">
                     <label for="ingredienti">Ingredienti (separati da un virgola):</label>
-                    <input type="text" name="foto" placeholder="<%=p.getIngredienti().toString().substring(1, p.getIngredienti().toString().length()-1) %>">
+                    <input type="text" name="ingredienti" placeholder="<%=p.getIngredienti().toString().substring(1, p.getIngredienti().toString().length()-1) %>">
                 </div>
+                  <span class="formError" id="checkIngredientiProdottoModifica">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("ingredienti")){;
+			%>
+					<%=error %>
+			   <%} %>
+			  </span>
+			  
                 <div class="single_input">
                     <label for="descrizione">Descrizione:</label>
                     <textarea name="descrizione" rows="4" cols="50" placeholder="<%=p.getDescrizione()%>"></textarea>
                 </div>
+                 <span class="formError" id="checkDescrizioneProdottoModifica">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("descrizione")){;
+			%>
+					<%=error %>
+			   <%} %>
+				</span>
+                
                 <div class="single_input">
                     <label for="categoria">Categoria:</label>
                     <select name="categoria" >
@@ -57,10 +101,29 @@
                         <option value="pizza">Pizza</option>
                     </select>
                 </div>
+                 <span class="formError" id="checkCategoriaProdotto">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("categoria")){;
+			%>
+					<%=error %>
+			   <%} %>
+				</span>
+				
                 <div class="single_input">
                     <label for="prezzo">Prezzo</label>
                     <input type="text" name="prezzo" placeholder="<%=p.getPrezzo()%>">
                 </div>
+                   <span class="formError" id="checkPrezzoProdotto">
+			<%
+				session.removeAttribute("errorType");
+				session.removeAttribute("error");
+				if(errorType!=null && errorType.equals("prezzo")){;
+			%>
+					<%=error %>
+			   <%} %>
+				</span>
 
                 <button type="submit">Modifica</button>
         </form>
