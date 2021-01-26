@@ -1,6 +1,7 @@
 package it.RistoManager.Control.Utente;
 
-import java.io.IOException;
+import java.io.IOException
+;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.RetrievalMethodResolver;
+//import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.RetrievalMethodResolver;
 
 import it.RistoManager.DAO.ClienteDAO;
 import it.RistoManager.Model.ClienteBean;
@@ -25,7 +26,11 @@ import it.RistoManager.utils.CodeGenerator;
 public class VisualizzaCodicePrenotato extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ClienteDAO cDAO=new ClienteDAO();
-       
+	
+	public static final String LUNGHEZZA_ERR = "L'inserimento non va a buon fine poiché il campo email non rispetta la lunghezza richiesta";
+	public static final String FORMATO_ERR = "L'inserimento non va a buon fine poiché il campo email non rispetta il formato";
+	public static final String CORRISPONDENZA_ERR = "L'inserimento non va a buon fine poichè non c'è corrispondenza con l'email inserita";
+	public static final String OK = "L'inserimento è andato a buon fine e vengono mostrati i risultati";   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,10 +42,26 @@ public class VisualizzaCodicePrenotato extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		String email=request.getParameter("email");
+		if (email.length() < 5) {
+			System.out.println(LUNGHEZZA_ERR);
+			request.setAttribute("errorTest", LUNGHEZZA_ERR);
+			request.setAttribute("flag", true);
+			RequestDispatcher dispatcher=request.getRequestDispatcher("/sala/cercaCodice.jsp");
+			dispatcher.forward(request, response);
+			return;
+		} else if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+			System.out.println(FORMATO_ERR);
+			request.setAttribute("errorTest", FORMATO_ERR);
+			request.setAttribute("flag", true);
+			RequestDispatcher dispatcher=request.getRequestDispatcher("/sala/cercaCodice.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		
 		List<ClienteBean> retrievedClients=null;
 //		ClienteBean updatedClient=null;
 //		CodeGenerator codeGenerator=new CodeGenerator();
@@ -58,15 +79,19 @@ public class VisualizzaCodicePrenotato extends HttpServlet {
 			e.printStackTrace();
 		}
 	
-		System.out.println(retrievedClients);
-		System.out.println(LocalDate.now());
+//		System.out.println(retrievedClients);
+//		System.out.println(LocalDate.now());
 		request.setAttribute("clienti", retrievedClients);
 		request.setAttribute("flag", true);
 		
+		if(retrievedClients.isEmpty()) {
+			request.setAttribute("errorTest", CORRISPONDENZA_ERR);
+		} else {
+			request.setAttribute("errorTest", OK);
+		}
+		
 		RequestDispatcher dispatcher=request.getRequestDispatcher("/sala/cercaCodice.jsp");
 		dispatcher.forward(request, response);
-		
-		
 		
 	}
 

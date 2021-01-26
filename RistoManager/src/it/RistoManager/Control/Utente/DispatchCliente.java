@@ -21,59 +21,81 @@ import it.RistoManager.Model.ClienteBean;
 @WebServlet("/dispatch")
 public class DispatchCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ClienteDAO cDao=new ClienteDAO();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DispatchCliente() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	ClienteDAO cDao = new ClienteDAO();
+
+	public static final String LUNGHEZZA_ERR = "L'inserimento non va a buon fine poiché il campo codice non rispetta la lunghezza richiesta";
+	public static final String FORMATO_ERR = "L'inserimento non va a buon fine poiché il campo codice non rispetta il formato";
+	public static final String PRENOTATO = "L'inserimento va a buon fine e l'utente viene rediretto al menu";
+	public static final String DA_REGISTRARE = "L'inserimento va a buon fine e l'utente può registrarsi";
+	public static final String CORRISPONDENZA_ERR = "L'inserimento non va a buon fine poichè non c'è corrispondenza con il codice del tavolo";
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DispatchCliente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ClienteBean cliente=null;
-		
-		String codiceTavolo=request.getParameter("codiceTavolo");
-		
+		ClienteBean cliente = null;
+
+		String codiceTavolo = request.getParameter("codiceTavolo");
+
 		System.out.println(codiceTavolo);
-		
+
+		if (codiceTavolo.length() != 5) {
+			request.setAttribute("errorTest", LUNGHEZZA_ERR);
+			response.sendRedirect("./accedi.jsp");
+			return;
+		} else if (!codiceTavolo.matches("^[a-z 0-9]{5}$")) {
+			request.setAttribute("errorTest", FORMATO_ERR);
+			response.sendRedirect("./accedi.jsp");
+			return;
+		}
 		request.getSession().setAttribute("codiceTavolo", codiceTavolo);
 		try {
-			cliente=cDao.retrieveByCodice(codiceTavolo);
+			cliente = cDao.retrieveByCodice(codiceTavolo);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		RequestDispatcher dispatcher=null;
-		if(cliente!=null && !cliente.getNome().isEmpty() && !cliente.getEmail().isEmpty()) {
+
+		RequestDispatcher dispatcher = null;
+		if (cliente != null && !cliente.getNome().isEmpty() && !cliente.getEmail().isEmpty()) {
+			// Caso prenotato
 			request.getSession().setAttribute("cliente", cliente);
-			dispatcher=request.getRequestDispatcher("/menu");
+			request.setAttribute("errorTest", PRENOTATO);
+			dispatcher = request.getRequestDispatcher("/menu");
 			dispatcher.forward(request, response);
 			return;
 		} else {
-			if(cliente==null) {
-				System.out.println("amore fa pac co cervell");
+			if (cliente == null) {
+				// Caso codice sbagliato
 				request.setAttribute("exist", false);
-				
-			}else {
+				request.setAttribute("errorTest", CORRISPONDENZA_ERR);
+				response.sendRedirect("./accedi.jsp");
+			} else {
+				// Caso utente che deve registrarsi
 				request.setAttribute("exist", true);
+				request.setAttribute("errorTest", DA_REGISTRARE);
 				response.sendRedirect("./registrazione.jsp");
 			}
 		}
-		
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

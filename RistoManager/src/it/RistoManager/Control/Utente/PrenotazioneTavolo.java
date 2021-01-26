@@ -2,6 +2,7 @@ package it.RistoManager.Control.Utente;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Properties;
@@ -33,7 +34,7 @@ import it.RistoManager.utils.EmailBodyGenerator;
 @WebServlet("/prenotazione")
 public class PrenotazioneTavolo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ClienteDAO cDao= new ClienteDAO();
+	ClienteDAO cDao = new ClienteDAO();
 	String fromEmail = "ambrosio.s@outlook.it";
 
 	/**
@@ -45,19 +46,117 @@ public class PrenotazioneTavolo extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ClienteBean cliente= new ClienteBean();
-		String nome=request.getParameter("nome");
-		String cognome=request.getParameter("cognome");
-		String cellulare=request.getParameter("cellulare");
-		String documento=request.getParameter("documento");
-		String email=request.getParameter("email");
-		LocalDate data=LocalDate.parse(request.getParameter("data"));
-		LocalTime ora=LocalTime.parse(request.getParameter("ora"));
-		int numPosti=Integer.parseInt(request.getParameter("numPosti"));
+		ClienteBean cliente = new ClienteBean();
+		String nome = request.getParameter("nome");
+		String cognome = request.getParameter("cognome");
+		String cellulare = request.getParameter("cellulare");
+		String documento = request.getParameter("documento");
+		String email = request.getParameter("email");
+		LocalDate data;
+		LocalTime ora;
+		int numPosti = -1;
+
+		try {
+			numPosti = Integer.parseInt(request.getParameter("numPosti"));
+		} catch (NumberFormatException n) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo numero di posti non è un numero");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		}
+
+		// Controllo su data e tempo
+
+		if (nome.length() < 1 || nome.length() > 20) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo nome non rispetta la lunghezza");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (!nome.matches("^[A-Z a-z]{1,20}$")) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo nome non rispetta il formato");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (cognome.length() < 1 || cognome.length() > 20) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo cognome non rispetta la lunghezza");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (!cognome.matches("^[A-Z a-z]{1,20}$")) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo cognome non rispetta il formato");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (cellulare.length() != 10) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo cellulare non rispetta la lunghezza");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (!cellulare.matches("^\\d{10}$")) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo cellulare non rispetta il formato");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (documento.length() < 1) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo documento non rispetta la lunghezza");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (!documento.matches("^[A-Z a-z 0-9]{1,}$")) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo documento non rispetta il formato");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (email.length() < 5) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo email non rispetta la lunghezza");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo email non rispetta il formato");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		} else if (numPosti < 1 || numPosti > 15) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il numero di posti deve essere compreso tra 1 e 15");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		}
+
+		try {
+			data = LocalDate.parse(request.getParameter("data"));
+		} catch (DateTimeException d) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo data non rispetta il formato");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		}
+		if (data.isBefore(LocalDate.now())) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè la data non può essere precedente a quella odierna");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		}
+		try {
+			ora = LocalTime.parse(request.getParameter("ora"));
+		} catch (DateTimeException d) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè il campo ora non rispetta il formato");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		}
+		if (ora.isBefore(LocalTime.of(12, 0)) || ora.isAfter(LocalTime.of(23, 0))) {
+			request.setAttribute("errorTest",
+					"L'inserimento non va a buon fine perchè l'orario deve essere compreso tra le 12:00 e le 23:00");
+			response.sendRedirect("./prenotazione.jsp");
+			return;
+		}
 
 		cliente.setCellulare(cellulare);
 		cliente.setCodiceTavolo(null);
@@ -68,29 +167,25 @@ public class PrenotazioneTavolo extends HttpServlet {
 		cliente.setNumeroPosti(numPosti);
 		cliente.setData(data);
 		cliente.setOra(ora);
-		
+
 		try {
-			cliente=cDao.create(cliente);
+			cliente = cDao.create(cliente);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class",
-				"javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "805");
-		
-		
 
-		Session session = Session.getDefaultInstance(props,new javax.mail.Authenticator() {
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("risto.manager.food@gmail.com","ristomanager");
+				return new PasswordAuthentication("risto.manager.food@gmail.com", "ristomanager");
 			}
 		});
 
@@ -98,34 +193,33 @@ public class PrenotazioneTavolo extends HttpServlet {
 
 			SMTPMessage message = new SMTPMessage(session);
 			message.setFrom(new InternetAddress("no-replay@ristomanager.it"));
-			message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse( email));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject("Conferma Prenotazione - RistoManager");
 			message.setContent(new EmailBodyGenerator(cliente).generate(), "text/html");
 			message.setNotifyOptions(SMTPMessage.NOTIFY_SUCCESS);
 			int returnOption = message.getReturnOption();
-			System.out.println(returnOption);        
+			System.out.println(returnOption);
 			Transport.send(message);
 			System.out.println("sent");
-			
+
 			request.setAttribute("flag", true);
-			
-			RequestDispatcher rd=request.getRequestDispatcher("/thankYou.jsp");
+			request.setAttribute("errorTest", "La prenotazione è andata a buon fine!");
+
+			RequestDispatcher rd = request.getRequestDispatcher("/thankYou.jsp");
 			rd.forward(request, response);
 
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
 		}
-		catch (MessagingException e) {
-			throw new RuntimeException(e);         
-		}
-
-
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
