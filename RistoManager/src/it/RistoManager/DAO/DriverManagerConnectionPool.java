@@ -32,7 +32,7 @@ public class DriverManagerConnectionPool {
 		String port = "3306";
 		String db = "ristomanager";
 		String username = "root";
-		String password = "Nexus5CoC";
+		String password = "password";
 		String url = "jdbc:mysql://localhost:3306/";
 		String database = "ristomanager";
 		String parameter = "?serverTimezone=UTC";
