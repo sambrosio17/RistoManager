@@ -51,6 +51,8 @@ public class PrenotazioneTavolo extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		
 		ClienteBean cliente = new ClienteBean();
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
@@ -66,6 +68,8 @@ public class PrenotazioneTavolo extends HttpServlet {
 		} catch (NumberFormatException n) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo numero di posti non è un numero");
+			session.setAttribute("errorType", "numeroPosti");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		}
@@ -75,56 +79,78 @@ public class PrenotazioneTavolo extends HttpServlet {
 		if (nome.length() < 1 || nome.length() > 20) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo nome non rispetta la lunghezza");
+			session.setAttribute("errorType", "nome");
+			session.setAttribute("error", "Il campo non rispetta la lunghezza");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (!nome.matches("^[A-Z a-z]{1,20}$")) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo nome non rispetta il formato");
+			session.setAttribute("errorType", "nome");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (cognome.length() < 1 || cognome.length() > 20) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo cognome non rispetta la lunghezza");
+			session.setAttribute("errorType", "cognome");
+			session.setAttribute("error", "Il campo non rispetta la lunghezza");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (!cognome.matches("^[A-Z a-z]{1,20}$")) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo cognome non rispetta il formato");
+			session.setAttribute("errorType", "cognome");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (cellulare.length() != 10) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo cellulare non rispetta la lunghezza");
+			session.setAttribute("errorType", "cellulare");
+			session.setAttribute("error", "Il campo non rispetta la lunghezza");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (!cellulare.matches("^\\d{10}$")) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo cellulare non rispetta il formato");
+			session.setAttribute("errorType", "cellulare");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (documento.length() < 1) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo documento non rispetta la lunghezza");
+			session.setAttribute("errorType", "documento");
+			session.setAttribute("error", "Il campo non rispetta la lunghezza minima");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (!documento.matches("^[A-Z a-z 0-9]{1,}$")) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo documento non rispetta il formato");
+			session.setAttribute("errorType", "documento");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (email.length() < 5) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo email non rispetta la lunghezza");
+			session.setAttribute("errorType", "email");
+			session.setAttribute("error", "Il campo non rispetta la lunghezza minima");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo email non rispetta il formato");
+			session.setAttribute("errorType", "email");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		} else if (numPosti < 1 || numPosti > 15) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il numero di posti deve essere compreso tra 1 e 15");
+			session.setAttribute("errorType", "numeroPosti");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		}
@@ -134,12 +160,16 @@ public class PrenotazioneTavolo extends HttpServlet {
 		} catch (DateTimeException d) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo data non rispetta il formato");
+			session.setAttribute("errorType", "data");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		}
 		if (data.isBefore(LocalDate.now())) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè la data non può essere precedente a quella odierna");
+			session.setAttribute("errorType", "data");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		}
@@ -148,12 +178,16 @@ public class PrenotazioneTavolo extends HttpServlet {
 		} catch (DateTimeException d) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè il campo ora non rispetta il formato");
+			session.setAttribute("errorType", "ora");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		}
 		if (ora.isBefore(LocalTime.of(12, 0)) || ora.isAfter(LocalTime.of(23, 0))) {
 			request.setAttribute("errorTest",
 					"L'inserimento non va a buon fine perchè l'orario deve essere compreso tra le 12:00 e le 23:00");
+			session.setAttribute("errorType", "ora");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./prenotazione.jsp");
 			return;
 		}
@@ -182,7 +216,7 @@ public class PrenotazioneTavolo extends HttpServlet {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "805");
 
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+		Session sessionMail = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication("risto.manager.food@gmail.com", "ristomanager");
@@ -191,7 +225,7 @@ public class PrenotazioneTavolo extends HttpServlet {
 
 		try {
 
-			SMTPMessage message = new SMTPMessage(session);
+			SMTPMessage message = new SMTPMessage(sessionMail);
 			message.setFrom(new InternetAddress("no-replay@ristomanager.it"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject("Conferma Prenotazione - RistoManager");

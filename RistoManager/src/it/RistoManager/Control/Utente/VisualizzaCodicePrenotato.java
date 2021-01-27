@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 //import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.RetrievalMethodResolver;
 
@@ -45,10 +46,14 @@ public class VisualizzaCodicePrenotato extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		HttpSession session = request.getSession();
+		
 		String email=request.getParameter("email");
 		if (email.length() < 5) {
 			System.out.println(LUNGHEZZA_ERR);
 			request.setAttribute("errorTest", LUNGHEZZA_ERR);
+			session.setAttribute("errorType", "email");
+			session.setAttribute("error", "Il campo non rispetta la lunghezza");
 			request.setAttribute("flag", true);
 			RequestDispatcher dispatcher=request.getRequestDispatcher("/sala/cercaCodice.jsp");
 			dispatcher.forward(request, response);
@@ -56,6 +61,8 @@ public class VisualizzaCodicePrenotato extends HttpServlet {
 		} else if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
 			System.out.println(FORMATO_ERR);
 			request.setAttribute("errorTest", FORMATO_ERR);
+			session.setAttribute("errorType", "email");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			request.setAttribute("flag", true);
 			RequestDispatcher dispatcher=request.getRequestDispatcher("/sala/cercaCodice.jsp");
 			dispatcher.forward(request, response);
@@ -86,6 +93,8 @@ public class VisualizzaCodicePrenotato extends HttpServlet {
 		
 		if(retrievedClients.isEmpty()) {
 			request.setAttribute("errorTest", CORRISPONDENZA_ERR);
+			session.setAttribute("errorType", "email");
+			session.setAttribute("error", "Non è stata trovata una corrispondenza");
 		} else {
 			request.setAttribute("errorTest", OK);
 		}

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.RistoManager.DAO.ClienteDAO;
 import it.RistoManager.Model.ClienteBean;
@@ -44,6 +45,7 @@ public class DispatchCliente extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ClienteBean cliente = null;
+		HttpSession session = request.getSession();
 
 		String codiceTavolo = request.getParameter("codiceTavolo");
 
@@ -51,10 +53,14 @@ public class DispatchCliente extends HttpServlet {
 
 		if (codiceTavolo.length() != 5) {
 			request.setAttribute("errorTest", LUNGHEZZA_ERR);
+			session.setAttribute("errorType", "codice");
+			session.setAttribute("error", "Il campo non rispetta la lunghezza");
 			response.sendRedirect("./accedi.jsp");
 			return;
 		} else if (!codiceTavolo.matches("^[a-z 0-9]{5}$")) {
 			request.setAttribute("errorTest", FORMATO_ERR);
+			session.setAttribute("errorType", "codice");
+			session.setAttribute("error", "Il campo non rispetta il formato");
 			response.sendRedirect("./accedi.jsp");
 			return;
 		}
@@ -79,6 +85,8 @@ public class DispatchCliente extends HttpServlet {
 				// Caso codice sbagliato
 				request.setAttribute("exist", false);
 				request.setAttribute("errorTest", CORRISPONDENZA_ERR);
+				session.setAttribute("errorType", "codice");
+				session.setAttribute("error", "Non è stata trovata una corrispondenza");
 				response.sendRedirect("./accedi.jsp");
 			} else {
 				// Caso utente che deve registrarsi
