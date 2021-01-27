@@ -65,7 +65,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("errorType","nome");
 			session.setAttribute("error", "il campo non rispetta la lunghezza minima");
 			
-			response.sendRedirect("./gestione/prodotti.jsp");
+			response.sendRedirect("./gestione/modifica.jsp");
 			return;
 		}else if(prezzo.isEmpty()){
 			request.setAttribute("errorTest", "L’inserimento fallisce perché il campo ‘prezzo’ è vuoto");
@@ -75,7 +75,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("error", "il campo non rispetta la lunghezza minima");
 			
 			
-			response.sendRedirect("./gestione/prodotti.jsp");
+			response.sendRedirect("./gestione/modifica.jsp");
 			return;
 		}else if((Float.parseFloat(prezzo))<0.01){	
 			
@@ -85,7 +85,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("error", "il campo non rispetta la lunghezza minima");
 			
 			
-			response.sendRedirect("./gestione/prodotti.jsp");
+			response.sendRedirect("./gestione/modifica.jsp");
 			return;
 		}else if(descrizione.length()>250) {
 	    	
@@ -95,7 +95,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("errorType","descrizione");
 			session.setAttribute("error", "lunghezza eccessiva");
 			
-			response.sendRedirect("./gestione/prodotti.jsp");
+			response.sendRedirect("./gestione/modifica.jsp");
 			return;
 		}else if(ingredienti.isEmpty()) {
 	    	
@@ -104,7 +104,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("errorType","ingredienti");
 			session.setAttribute("error", "il campo non rispetta la lunghezza minima");
 			
-			response.sendRedirect("./gestione/prodotti.jsp");
+			response.sendRedirect("./gestione/modifica.jsp");
 			return;
 		}else if(((ingredienti.contains("@")||ingredienti.contains("?")||ingredienti.contains("!")))) {
 	    	
@@ -113,7 +113,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("errorType","ingredienti");
 			session.setAttribute("error", "il campo non rispetta il formato");
 			
-			response.sendRedirect("./gestione/prodotti.jsp");
+			response.sendRedirect("./gestione/modifica.jsp");
 			return;
 		}else if(categoria.isEmpty()) {
 	    	
@@ -122,7 +122,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("errorType","categoria");
 			session.setAttribute("error", "il campo non rispetta la lunghezza minima");
 			
-			response.sendRedirect("./gestione/prodotti.jsp");
+			response.sendRedirect("./gestione/modifica.jsp");
 			return;
 		}else if(!(categoria.equals("primo")||categoria.equals("pizza")||categoria.equals("secondo")||categoria.equals("antipasto")||categoria.equals("bibite")||categoria.equals("contorno"))) {
 	    	
@@ -131,7 +131,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("errorType","categoria");
 			session.setAttribute("error", "il campo non rispetta il formato");
 			
-			response.sendRedirect("./gestione/prodotti.jsp");	
+			response.sendRedirect("./gestione/modifica.jsp");	
 			return;
 		}else if(foto.isEmpty()) {
 	    	
@@ -140,7 +140,7 @@ public class ModificaProdotto extends HttpServlet {
 			session.setAttribute("errorType","foto");
 			session.setAttribute("error", "il campo non rispetta la lunghezza minima");
 			
-			response.sendRedirect("./gestione/prodotti.jsp");	
+			response.sendRedirect("./gestione/modifica.jsp");	
 			return;
 		}else {
 		
