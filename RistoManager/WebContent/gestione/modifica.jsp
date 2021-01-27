@@ -36,7 +36,7 @@
         	<input name="id" value="<%=p.getId() %>" hidden>
                 <div class="single_input">
                     <label for="nome">Nome:</label>
-                    <input type="text" name="nome" placeholder="<%=p.getNomeprodotto()%>">
+                    <input type="text" name="nome" placeholder="<%=p.getNomeprodotto()%>" required>
                 </div>
                  <span class="formError" id="checkNomeProdottoModifica">
 				<%
@@ -50,7 +50,7 @@
 				
                 <div class="single_input">
                   <label for="foto">Immagine:</label>
-                  <input type="text" name="immagine" placeholder="<%=p.getImmagine()%>">
+                  <input type="text" name="immagine" placeholder="<%=p.getImmagine()%>" required>
               </div>
                <span class="formError" id="checkFotoProdottoModifica">
 			<%
@@ -64,7 +64,7 @@
 			  
                 <div class="single_input">
                     <label for="ingredienti">Ingredienti (separati da un virgola):</label>
-                    <input type="text" name="ingredienti" placeholder="<%=p.getIngredienti().toString().substring(1, p.getIngredienti().toString().length()-1) %>">
+                    <input type="text" name="ingredienti" placeholder="<%=p.getIngredienti().toString().substring(1, p.getIngredienti().toString().length()-1) %>" required>
                 </div>
                   <span class="formError" id="checkIngredientiProdottoModifica">
 			<%
@@ -78,7 +78,7 @@
 			  
                 <div class="single_input">
                     <label for="descrizione">Descrizione:</label>
-                    <textarea name="descrizione" rows="4" cols="50" placeholder="<%=p.getDescrizione()%>"></textarea>
+                    <textarea name="descrizione" rows="4" cols="50" placeholder="<%=p.getDescrizione()%>" required></textarea>
                 </div>
                  <span class="formError" id="checkDescrizioneProdottoModifica">
 			<%
@@ -113,7 +113,7 @@
 				
                 <div class="single_input">
                     <label for="prezzo">Prezzo</label>
-                    <input type="text" name="prezzo" placeholder="<%=p.getPrezzo()%>">
+                    <input type="text" name="prezzo" placeholder="<%=p.getPrezzo()%>" required>
                 </div>
                    <span class="formError" id="checkPrezzoProdotto">
 			<%
