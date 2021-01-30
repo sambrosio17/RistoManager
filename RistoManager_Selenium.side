@@ -2,7 +2,7 @@
   "id": "13aa73ee-2773-4bcf-8480-055f8911643e",
   "version": "2.0",
   "name": "RistoManager_Selenium",
-  "url": "http://localhost/RistoManager/prenotazione.jsp",
+  "url": "http://localhost/RistoManager/login.jsp",
   "tests": [{
     "id": "94f4b452-34c0-4909-a5f9-6f56a6bb5cc9",
     "name": "Login_CampiVuoti",
@@ -348,21 +348,92 @@
     "id": "284c5e95-874b-4ba3-abd4-5353ce4eea44",
     "name": "AggiungiProdotto_PrezzoPiccolo",
     "commands": [{
-      "id": "5c941ff4-309c-40ed-a321-4e10f818987c",
+      "id": "c104a8c3-2d15-4ed3-a754-aa6ffcba498c",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/gestione/nuovoProdotto.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "0a244ae0-df12-4b44-a046-206f62c05847",
+      "id": "45ffd67a-faad-4c39-9c2e-d2a2c727bbbe",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "3a504840-6985-4ad7-bd44-7e2c6ba68819",
+      "id": "00f0aa01-63e1-4b64-a218-c98274875816",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d0cc1354-aeb7-45a2-969a-70224c4527c0",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "nappocarlaalessia@gmail.it"
+    }, {
+      "id": "a661c964-2743-4fba-8af8-11dbaca5cf65",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f9c5f8d6-4b0c-4757-a466-119073db6528",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "alessia99"
+    }, {
+      "id": "17508593-5dff-40b8-8eb4-77f2061727b9",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d1443307-b473-4797-ada2-2f95d2188893",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(1)",
+      "targets": [
+        ["css=a:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Aggiungi Prodotto')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../gestione/nuovoProdotto.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea356532-b2c8-4f0c-8ea3-bcd42211c848",
       "comment": "",
       "command": "click",
       "target": "name=nome",
@@ -374,7 +445,7 @@
       ],
       "value": ""
     }, {
-      "id": "1543c195-35f0-488a-956a-7349d2a4d520",
+      "id": "573cacea-8b95-44ab-b115-b642ed1da373",
       "comment": "",
       "command": "type",
       "target": "name=nome",
@@ -384,9 +455,9 @@
         ["xpath=//input[@name='nome']", "xpath:attributes"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "MARCO"
+      "value": "pizza"
     }, {
-      "id": "6d5fb34c-b20c-4c7f-beeb-d13af9b67498",
+      "id": "0e6ac725-29a8-4a5b-b918-31e864ada3ab",
       "comment": "",
       "command": "click",
       "target": "name=foto",
@@ -398,7 +469,7 @@
       ],
       "value": ""
     }, {
-      "id": "810243d7-a4a1-4c30-8c88-c4a1306e2d73",
+      "id": "9407a1a8-a893-4650-a6e5-45fcc11e1881",
       "comment": "",
       "command": "type",
       "target": "name=foto",
@@ -410,7 +481,7 @@
       ],
       "value": "logo.png"
     }, {
-      "id": "e81b4021-33ec-4359-817e-80d6566ba99e",
+      "id": "3312f31b-f92c-4dfa-a5e4-3551cf2b5cec",
       "comment": "",
       "command": "click",
       "target": "name=ingredienti",
@@ -422,7 +493,7 @@
       ],
       "value": ""
     }, {
-      "id": "81cab00d-5f95-49a4-bb90-439fdb1657c9",
+      "id": "02b6b0a2-b330-41b1-91bc-56fe80b178d5",
       "comment": "",
       "command": "type",
       "target": "name=ingredienti",
@@ -434,7 +505,7 @@
       ],
       "value": "gatti, funghi, patate"
     }, {
-      "id": "5ee40a82-37f6-46f6-8bdd-454a160d46bc",
+      "id": "91251ca6-ef5e-4b9c-b11a-c39e487209f5",
       "comment": "",
       "command": "click",
       "target": "name=descrizione",
@@ -446,7 +517,7 @@
       ],
       "value": ""
     }, {
-      "id": "ce7f7d9f-7d1d-4f01-a466-a99c65208316",
+      "id": "b7472e5f-7c75-47c6-82a2-e5365c502dae",
       "comment": "",
       "command": "type",
       "target": "name=descrizione",
@@ -456,9 +527,9 @@
         ["xpath=//textarea[@name='descrizione']", "xpath:attributes"],
         ["xpath=//textarea", "xpath:position"]
       ],
-      "value": "aaa"
+      "value": "aaaaa"
     }, {
-      "id": "35f8fd27-ebc9-4740-b638-6aeb498a5b28",
+      "id": "f866c3e5-d5d4-4f83-98fd-bd2991276b8c",
       "comment": "",
       "command": "click",
       "target": "name=prezzo",
@@ -470,7 +541,7 @@
       ],
       "value": ""
     }, {
-      "id": "f10ef535-24e7-47f8-9134-ef700f2bb3db",
+      "id": "8c963609-c9f7-4d40-861a-fb20e858856d",
       "comment": "",
       "command": "type",
       "target": "name=prezzo",
@@ -482,7 +553,7 @@
       ],
       "value": "0.0001"
     }, {
-      "id": "0aded030-5a5f-40b6-91a7-17489d9e5aae",
+      "id": "1b22b75f-b9f2-4a7f-ba33-cf5ae36488b0",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -493,7 +564,7 @@
       ],
       "value": ""
     }, {
-      "id": "8ce8430e-f20b-45e9-ba5a-444c893c2eca",
+      "id": "4aebb449-aabd-4c05-8ce5-265adba81c9f",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkPrezzoProdotto",
@@ -509,21 +580,92 @@
     "id": "0c98e6b6-b674-4259-8381-9942b4415657",
     "name": "AggiungiProdotto_DescrizioneEccessiva",
     "commands": [{
-      "id": "fd280107-024f-48fa-94a9-ea0acafae17b",
+      "id": "67a5b1a1-55c7-428c-a158-b2431cbb8988",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/gestione/nuovoProdotto.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "72009023-3a42-4e17-a4fd-d3771647d328",
+      "id": "66683dbe-2a74-4ff0-b7b5-2a9b94dbcf42",
       "comment": "",
       "command": "setWindowSize",
-      "target": "1382x744",
+      "target": "516x605",
       "targets": [],
       "value": ""
     }, {
-      "id": "c7d69024-080b-460f-a1af-5251fd3d5ea0",
+      "id": "94db1c79-ae38-421e-a4f0-e70a5083cb7a",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "addfb179-6c29-4db8-b480-42ac950fe55a",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "nappocarlaalessia@gmail.it"
+    }, {
+      "id": "b6283a87-c4ae-4d3b-b607-b5b0f0ae1131",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "daa35ab5-3c33-4542-b673-fdb7f2c1973d",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "alessia99"
+    }, {
+      "id": "b1c12d99-de73-450d-97eb-34f58451aa79",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "de9e5b53-2dfe-4d26-be79-b20e4d77e341",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(1)",
+      "targets": [
+        ["css=a:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Aggiungi Prodotto')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../gestione/nuovoProdotto.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "73958a5e-296e-4fce-b931-80f39edf7931",
       "comment": "",
       "command": "click",
       "target": "name=nome",
@@ -535,7 +677,7 @@
       ],
       "value": ""
     }, {
-      "id": "3a4a2964-46fa-472d-b194-7c967f888fad",
+      "id": "93530c4d-f38f-40d8-87dd-1abffe2831b9",
       "comment": "",
       "command": "type",
       "target": "name=nome",
@@ -547,7 +689,7 @@
       ],
       "value": "pizza"
     }, {
-      "id": "802a0948-5e14-49db-8e69-9853e3b7ecb2",
+      "id": "68992bdb-9766-4812-a4b1-0f93eef8e93f",
       "comment": "",
       "command": "click",
       "target": "name=foto",
@@ -559,7 +701,7 @@
       ],
       "value": ""
     }, {
-      "id": "764e881a-b89c-45bc-9d4d-faa385840f67",
+      "id": "60e3e5ba-b081-47fa-b037-86a0a6766d1e",
       "comment": "",
       "command": "type",
       "target": "name=foto",
@@ -571,7 +713,7 @@
       ],
       "value": "logo.png"
     }, {
-      "id": "f5c1636d-a139-4eea-90f6-ffa8a6bead70",
+      "id": "50d5e07c-6001-4b4c-9cc5-c85b551ad0e5",
       "comment": "",
       "command": "click",
       "target": "name=ingredienti",
@@ -583,7 +725,7 @@
       ],
       "value": ""
     }, {
-      "id": "2bf3caaa-e433-4a34-acfa-8e576685c979",
+      "id": "e313f9cd-44fe-4fce-9568-2210a1b079c5",
       "comment": "",
       "command": "type",
       "target": "name=ingredienti",
@@ -595,7 +737,7 @@
       ],
       "value": "gatti, funghi, patate"
     }, {
-      "id": "81044307-9173-4df8-8cf2-b2c534abd13d",
+      "id": "8e2f2194-7165-4f39-84c3-fe4f14564329",
       "comment": "",
       "command": "click",
       "target": "name=descrizione",
@@ -607,7 +749,7 @@
       ],
       "value": ""
     }, {
-      "id": "f8293ad0-5fbb-4a6e-a344-ef1eb1ab2ae0",
+      "id": "5ccb8fda-3e74-4957-8131-c2a4825bd0af",
       "comment": "",
       "command": "type",
       "target": "name=descrizione",
@@ -619,7 +761,7 @@
       ],
       "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     }, {
-      "id": "dc0d8250-8b6d-4e6e-8c1e-08466de582b6",
+      "id": "33f14836-286f-4b29-8a15-b53ced83ac92",
       "comment": "",
       "command": "click",
       "target": "name=prezzo",
@@ -631,7 +773,7 @@
       ],
       "value": ""
     }, {
-      "id": "0763284e-0d8f-423f-876e-e413b2105b36",
+      "id": "d72158ae-e98e-4f89-8a8b-c067a95903c9",
       "comment": "",
       "command": "type",
       "target": "name=prezzo",
@@ -641,20 +783,19 @@
         ["xpath=//input[@name='prezzo']", "xpath:attributes"],
         ["xpath=//div[6]/input", "xpath:position"]
       ],
-      "value": "2"
+      "value": "4"
     }, {
-      "id": "8c5ecbbb-742d-43b1-b224-cd739a88893a",
+      "id": "4236fb22-3104-4723-9350-d7dfb76865f3",
       "comment": "",
       "command": "click",
-      "target": "css=.product_form",
+      "target": "css=.single_input:nth-child(9)",
       "targets": [
-        ["css=.product_form", "css:finder"],
-        ["xpath=//form[@action='../aggiungiProdotto']", "xpath:attributes"],
-        ["xpath=//form", "xpath:position"]
+        ["css=.single_input:nth-child(9)", "css:finder"],
+        ["xpath=//div[5]", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "65687289-d3d2-4bbf-b109-a9f8b354f671",
+      "id": "60afa07a-ad33-4c5b-bd79-f7e0dbcb9824",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -665,7 +806,7 @@
       ],
       "value": ""
     }, {
-      "id": "2eb3f0e6-77b2-4d95-9609-d7faba017f0a",
+      "id": "4f7f6ce1-519e-440f-a53b-16597abeee3d",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkDescrizioneProdotto",
@@ -682,32 +823,93 @@
     "id": "ead2a54b-9c8b-4194-aded-474b86d59533",
     "name": "AggiungiProdotto_FormatoIngredientiErrato",
     "commands": [{
-      "id": "5563df25-aa30-416b-b6c5-fa0a75d9b593",
+      "id": "f74d44d4-0610-4dbd-8b81-5ceb9d3b8442",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/gestione/nuovoProdotto.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "73b60be6-d4c8-4d4d-90d8-01ed7b71ad11",
+      "id": "8ed0ad38-4aff-4cba-a97d-0ec12fce1be1",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "1e4c18d8-e014-4602-982d-cd156d009027",
+      "id": "546c3449-eedc-42de-8ae5-a417aa66b3ef",
       "comment": "",
       "command": "click",
-      "target": "css=.product_form",
+      "target": "name=email",
       "targets": [
-        ["css=.product_form", "css:finder"],
-        ["xpath=//form[@action='../aggiungiProdotto']", "xpath:attributes"],
-        ["xpath=//form", "xpath:position"]
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "6f9b6b7c-de3d-40cf-9fc6-bb25c69098dd",
+      "id": "6f543d27-4a75-4429-b027-9aff4479c4d9",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "nappocarlaalessia@gmail.it"
+    }, {
+      "id": "874e8db6-7f0d-411a-a255-560118218a25",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "62bb5b52-6823-404f-8d2e-9633c333d9b1",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "alessia99"
+    }, {
+      "id": "7f512ca3-35f3-4619-b8b6-21a83fd450f8",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "b944d230-654c-43be-b03b-3d962fdf92b6",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(1)",
+      "targets": [
+        ["css=a:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Aggiungi Prodotto')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../gestione/nuovoProdotto.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e27cd00d-7f11-45e2-97a4-67849c198c1f",
       "comment": "",
       "command": "click",
       "target": "name=nome",
@@ -719,7 +921,7 @@
       ],
       "value": ""
     }, {
-      "id": "6000e08e-2038-44c8-abf5-c62162af954f",
+      "id": "3546c080-a831-4c0e-8144-84898695eda1",
       "comment": "",
       "command": "type",
       "target": "name=nome",
@@ -731,7 +933,7 @@
       ],
       "value": "pizza"
     }, {
-      "id": "156ad89e-e8f0-42a3-aaec-c0c128bb6f67",
+      "id": "675d9e70-2357-48a9-9687-284757b09527",
       "comment": "",
       "command": "click",
       "target": "name=foto",
@@ -743,7 +945,7 @@
       ],
       "value": ""
     }, {
-      "id": "8659823e-c78d-40e9-9d3b-1185b5480ef9",
+      "id": "459b1fca-224f-4bb1-a515-ad303fe72390",
       "comment": "",
       "command": "type",
       "target": "name=foto",
@@ -755,17 +957,7 @@
       ],
       "value": "logo.png"
     }, {
-      "id": "5dbdb46a-09b9-437a-b795-05ade7e2ede6",
-      "comment": "",
-      "command": "click",
-      "target": "css=.single_input:nth-child(5) > label",
-      "targets": [
-        ["css=.single_input:nth-child(5) > label", "css:finder"],
-        ["xpath=//div[3]/label", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "81e869d5-c44f-4216-9a4d-8e7d98c4d3bf",
+      "id": "9a5d007c-e99d-41ff-9d9d-482f1bf9cfec",
       "comment": "",
       "command": "click",
       "target": "name=ingredienti",
@@ -777,7 +969,7 @@
       ],
       "value": ""
     }, {
-      "id": "15cd6fb8-536e-4ad7-825c-953fbe7905db",
+      "id": "537719f9-a82b-458b-8bfd-b9535c96ad40",
       "comment": "",
       "command": "type",
       "target": "name=ingredienti",
@@ -789,7 +981,7 @@
       ],
       "value": "cose?@"
     }, {
-      "id": "67ed420f-8d69-4101-8e77-7b0a2422bc12",
+      "id": "b447070f-7190-4ba5-878c-c02ca0397c33",
       "comment": "",
       "command": "click",
       "target": "name=descrizione",
@@ -801,7 +993,7 @@
       ],
       "value": ""
     }, {
-      "id": "1f29a972-c844-4924-83f1-f85215626f7e",
+      "id": "a882e59c-c44d-45c9-9b52-10bd63151605",
       "comment": "",
       "command": "type",
       "target": "name=descrizione",
@@ -811,9 +1003,9 @@
         ["xpath=//textarea[@name='descrizione']", "xpath:attributes"],
         ["xpath=//textarea", "xpath:position"]
       ],
-      "value": "pizza"
+      "value": "aaa"
     }, {
-      "id": "2f771024-d8fb-4640-9427-c0996294d2d5",
+      "id": "e17e28ee-5ece-4e73-b9a1-7ed054427b10",
       "comment": "",
       "command": "click",
       "target": "name=prezzo",
@@ -825,7 +1017,7 @@
       ],
       "value": ""
     }, {
-      "id": "c5726444-3866-436b-a940-dbfbf808dd27",
+      "id": "3182a317-91e0-4dac-b878-78633cc0b1af",
       "comment": "",
       "command": "type",
       "target": "name=prezzo",
@@ -835,19 +1027,20 @@
         ["xpath=//input[@name='prezzo']", "xpath:attributes"],
         ["xpath=//div[6]/input", "xpath:position"]
       ],
-      "value": "2"
+      "value": "3"
     }, {
-      "id": "72740c7b-4116-43c2-a885-e056cb37787c",
+      "id": "fdecdcad-54f9-4afa-9f41-76f33c3e804d",
       "comment": "",
       "command": "click",
-      "target": "css=.main_container",
+      "target": "css=.product_form",
       "targets": [
-        ["css=.main_container", "css:finder"],
-        ["xpath=//div", "xpath:position"]
+        ["css=.product_form", "css:finder"],
+        ["xpath=//form[@action='../aggiungiProdotto']", "xpath:attributes"],
+        ["xpath=//form", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "bad3034e-4d2e-4a9b-8cd5-711f8db078a2",
+      "id": "2519a380-2db2-45eb-bec9-c6027713546d",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -858,7 +1051,7 @@
       ],
       "value": ""
     }, {
-      "id": "81a1749e-083d-4b9f-bd9b-0a73b4af8885",
+      "id": "c56cf4ea-b21d-48d1-9ef4-073d9bdb18eb",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkIngredientiProdotto",
@@ -875,21 +1068,90 @@
     "id": "92a6be62-6371-4b41-88ed-998fe0bcc810",
     "name": "ModificaProdotto_PrezzoPiccolo",
     "commands": [{
-      "id": "5024f901-c455-45e9-8d13-ce9b7723979b",
+      "id": "0a36fba7-93ec-4954-a62f-cac6e94a3089",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/gestione/index.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "7f3acaff-78ef-40ff-9236-8117ab6d4d64",
+      "id": "fbcba346-3678-4711-92c5-1023aed22529",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "f21dda25-eac1-4eb5-9ed0-6054869ff30b",
+      "id": "ca8e00ba-a18a-4036-9faf-c530d364d3cb",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ddf8e6bd-296f-480e-9ec8-b98879a592eb",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "nappocarlaalessia@gmail.it"
+    }, {
+      "id": "da28c367-ad96-49b6-a897-8ece594c17a1",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bfad77c3-f332-4aeb-94a2-6e98a564d11e",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "alessia99"
+    }, {
+      "id": "8c56b070-315c-429b-8cf2-44e12ee5fee2",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c78f53d-5c74-4dd8-955f-3eca2ada91f0",
+      "comment": "",
+      "command": "click",
+      "target": "css=html",
+      "targets": [
+        ["css=html", "css:finder"],
+        ["xpath=//html", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "233cad91-9db6-40cb-9b0c-5e3405d024d0",
       "comment": "",
       "command": "click",
       "target": "css=a:nth-child(2)",
@@ -901,18 +1163,18 @@
       ],
       "value": ""
     }, {
-      "id": "d3efedd4-301c-4b68-89bc-c02b521577a8",
+      "id": "60206fb1-bc21-478f-a380-c90d9d0681e1",
       "comment": "",
       "command": "click",
-      "target": "css=tr:nth-child(32) .fa-pen",
+      "target": "css=tr:nth-child(1) .fa-pen",
       "targets": [
-        ["css=tr:nth-child(32) .fa-pen", "css:finder"],
-        ["xpath=//a[contains(@href, './prodotto?action=modifica&id=35')]", "xpath:href"],
-        ["xpath=//tr[32]/td[6]/a[2]", "xpath:position"]
+        ["css=tr:nth-child(1) .fa-pen", "css:finder"],
+        ["xpath=//a[contains(@href, './prodotto?action=modifica&id=2')]", "xpath:href"],
+        ["xpath=//td[6]/a[2]", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "b80b9c4c-c53f-4439-8b55-acd6a55929c2",
+      "id": "577190cf-8a3c-404b-a0f3-faf92613efc9",
       "comment": "",
       "command": "click",
       "target": "name=prezzo",
@@ -924,7 +1186,7 @@
       ],
       "value": ""
     }, {
-      "id": "56f67a53-df78-4cb0-95de-b68757fefec8",
+      "id": "619d9a97-909d-4e54-8851-468776d9cd69",
       "comment": "",
       "command": "type",
       "target": "name=prezzo",
@@ -936,7 +1198,7 @@
       ],
       "value": "0.0001"
     }, {
-      "id": "20eb1213-662d-4c7b-9f79-2b914dd8ed82",
+      "id": "6c451340-17e2-45c6-8f48-d51e823245c9",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -947,7 +1209,7 @@
       ],
       "value": ""
     }, {
-      "id": "b69f92fe-94e0-457f-b0fd-6cf9f9c312b9",
+      "id": "df0a5fdd-6793-41cc-9e1f-70570b9edd55",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkPrezzoProdotto",
@@ -963,31 +1225,80 @@
     "id": "7ac0ebce-d26e-4ad4-9f67-b82c9b50f9b8",
     "name": "ModificaProdotto_DescrizioneEccessiva",
     "commands": [{
-      "id": "0e6e57f0-9f3f-469a-a0d3-54e3f73f679b",
+      "id": "0251467d-0acd-46e2-9bd0-15975b576c18",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/gestione/index.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "22f55b73-6574-488e-9f2a-92858b412097",
+      "id": "bb4077c8-c1bd-4fc5-8e81-942002f28de8",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "49f15123-539f-4bb4-89f8-668f9c0e0856",
+      "id": "c5237973-477c-4c4b-b569-1be5cad631b8",
       "comment": "",
       "command": "click",
-      "target": "css=.subheader",
+      "target": "name=email",
       "targets": [
-        ["css=.subheader", "css:finder"],
-        ["xpath=//div[2]", "xpath:position"]
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "99b4d19f-cf6e-41ce-992f-d25c3f79bd0b",
+      "id": "9d4c764d-9bee-488a-ab9f-825f85197bc7",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "nappocarlaalessia@gmail.it"
+    }, {
+      "id": "2488ad66-21ca-4c91-9f04-bb025fc4a490",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d270e2b4-f261-4c84-aff5-84f81f2136d4",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "alessia99"
+    }, {
+      "id": "0b1222b8-db5e-43c0-8ca9-4f082106cf9d",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e6b0765-6b59-4c8d-bb82-aec8c58804bd",
       "comment": "",
       "command": "click",
       "target": "css=a:nth-child(2)",
@@ -999,28 +1310,30 @@
       ],
       "value": ""
     }, {
-      "id": "4e05d84b-5e25-43f9-8105-e37e0ed1036e",
+      "id": "3343e049-a44c-4836-b42a-e91eff05d963",
       "comment": "",
       "command": "click",
-      "target": "css=tr:nth-child(32) .fa-pen",
+      "target": "css=tr:nth-child(1) .fa-pen",
       "targets": [
-        ["css=tr:nth-child(32) .fa-pen", "css:finder"],
-        ["xpath=//a[contains(@href, './prodotto?action=modifica&id=35')]", "xpath:href"],
-        ["xpath=//tr[32]/td[6]/a[2]", "xpath:position"]
+        ["css=tr:nth-child(1) .fa-pen", "css:finder"],
+        ["xpath=//a[contains(@href, './prodotto?action=modifica&id=2')]", "xpath:href"],
+        ["xpath=//td[6]/a[2]", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "bd35e287-b919-4dc8-b63c-70ca3ed55abf",
+      "id": "320be99b-0aa7-4bd6-9a09-dace37e8ae17",
       "comment": "",
       "command": "click",
-      "target": "css=.single_input:nth-child(8)",
+      "target": "name=descrizione",
       "targets": [
-        ["css=.single_input:nth-child(8)", "css:finder"],
-        ["xpath=//div[4]", "xpath:position"]
+        ["name=descrizione", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='descrizione']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "0e78073a-3f35-4da8-be62-228728be53b7",
+      "id": "ff8c3efa-fac1-47ea-8c26-2afc618bd63c",
       "comment": "",
       "command": "type",
       "target": "name=descrizione",
@@ -1030,9 +1343,9 @@
         ["xpath=//textarea[@name='descrizione']", "xpath:attributes"],
         ["xpath=//textarea", "xpath:position"]
       ],
-      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "value": "monoporzioneaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     }, {
-      "id": "015e2394-d257-41e5-9b4f-575f187561d9",
+      "id": "7ae4f981-198b-44e9-8648-15cc9d3e5436",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -1043,7 +1356,7 @@
       ],
       "value": ""
     }, {
-      "id": "1a5a9415-c393-4c0f-95b9-913de02fd732",
+      "id": "4da1c81f-fe68-4ef2-b7f6-16eda2ce7100",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkDescrizioneProdottoModifica",
@@ -1060,21 +1373,90 @@
     "id": "45f9ee6d-56f5-431e-9a90-2e8a5a42b9e0",
     "name": "ModificaPrdotto_FormatoIngredientiErrato",
     "commands": [{
-      "id": "9da5552d-ca1f-4d4b-acef-2ace3ed8c1df",
+      "id": "86f49efb-ab7c-4297-9410-ceb568d7aa76",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/gestione/index.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "6797f923-03b3-43e9-bbc2-4d313cf22e61",
+      "id": "a2444168-7eb7-4d47-aecc-165b34caf93b",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "ea03211b-ad75-4b02-a84d-43d02a919854",
+      "id": "5e22a016-cf8b-4e9b-8299-57df41da970f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.single_login_input:nth-child(1) > label",
+      "targets": [
+        ["css=.single_login_input:nth-child(1) > label", "css:finder"],
+        ["xpath=//label", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8bb637a0-4dd5-47e3-82e2-c4fff8967e5b",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7cb76a4-cc16-42d9-9077-f08ab016d276",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "nappocarlaalessia@gmail.it"
+    }, {
+      "id": "13b46539-012c-4b60-a7d0-1c20839f85c3",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "add1fccb-4292-4481-af61-fcede71b9b57",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "alessia99"
+    }, {
+      "id": "79ab5e25-d0e8-45b3-8656-ba455d342165",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5dc29986-dcf0-4c16-b2dc-cfc684e98ac7",
       "comment": "",
       "command": "click",
       "target": "css=a:nth-child(2)",
@@ -1086,50 +1468,29 @@
       ],
       "value": ""
     }, {
-      "id": "de45d596-28da-4188-a794-164607ff33ff",
+      "id": "aa6d610a-d73c-4cf2-bafb-0b7235262d1e",
       "comment": "",
       "command": "click",
-      "target": "css=tr:nth-child(32) .fa-pen",
+      "target": "css=tr:nth-child(1) .fa-pen",
       "targets": [
-        ["css=tr:nth-child(32) .fa-pen", "css:finder"],
-        ["xpath=//a[contains(@href, './prodotto?action=modifica&id=35')]", "xpath:href"],
-        ["xpath=//tr[32]/td[6]/a[2]", "xpath:position"]
+        ["css=tr:nth-child(1) .fa-pen", "css:finder"],
+        ["xpath=//a[contains(@href, './prodotto?action=modifica&id=2')]", "xpath:href"],
+        ["xpath=//td[6]/a[2]", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "5f785883-03bf-4bab-bda2-6be7d6f8a6c8",
+      "id": "3d058e73-7b6f-4958-b8a8-abc6446c6bb8",
       "comment": "",
       "command": "click",
-      "target": "name=ingredienti",
+      "target": "css=.product_form",
       "targets": [
-        ["name=ingredienti", "name"],
-        ["css=.single_input:nth-child(6) > input", "css:finder"],
-        ["xpath=//input[@name='ingredienti']", "xpath:attributes"],
-        ["xpath=//div[3]/input", "xpath:position"]
+        ["css=.product_form", "css:finder"],
+        ["xpath=//form[@action='./modificaProdotto']", "xpath:attributes"],
+        ["xpath=//form", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "ca73f28b-258f-4e9a-a9ad-5087ef3f1d13",
-      "comment": "",
-      "command": "click",
-      "target": "css=.single_input:nth-child(6)",
-      "targets": [
-        ["css=.single_input:nth-child(6)", "css:finder"],
-        ["xpath=//div[3]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "01e7b985-138e-40ba-a2be-a89b0b78ccde",
-      "comment": "",
-      "command": "doubleClick",
-      "target": "css=.single_input:nth-child(6)",
-      "targets": [
-        ["css=.single_input:nth-child(6)", "css:finder"],
-        ["xpath=//div[3]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "5cc02a17-c2f1-42c4-8718-ae86c5a1a7e1",
+      "id": "99379e74-dc02-4729-9053-dc4d00c667af",
       "comment": "",
       "command": "type",
       "target": "name=ingredienti",
@@ -1141,7 +1502,7 @@
       ],
       "value": "cose?@"
     }, {
-      "id": "34635d40-f235-4a33-849c-7a2c8aafe561",
+      "id": "069e2cc9-3e4f-4cd9-8af3-1e3b8314631e",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -1152,7 +1513,7 @@
       ],
       "value": ""
     }, {
-      "id": "d8ef30af-d3ab-4f87-8ba2-eef81e9bdf3e",
+      "id": "adf6e5e4-c9f1-4926-a708-4b1b29cefed2",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkIngredientiProdottoModifica",
@@ -1169,21 +1530,80 @@
     "id": "758c1b4a-27aa-4e0a-b4ab-ff031a49be8c",
     "name": "ModificaProdotto_EsitoCorretto",
     "commands": [{
-      "id": "ccbc79a6-eb80-4008-9b6e-98f3a98de8ee",
+      "id": "aa47896f-3292-4f7c-8480-98fc7e27d3c7",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/gestione/index.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "6cc3a093-8c28-49d5-a902-95fff47fa57f",
+      "id": "8c97ae09-4db8-4aca-8446-a547a309a500",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "d561d363-dc91-441a-a16d-d2de5f247587",
+      "id": "bfeda22e-3cca-4387-b723-3162f44841fc",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "09dec04d-efd8-4607-84bb-be30934ded07",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "nappocarlaalessia@gmail.it"
+    }, {
+      "id": "7c73bc19-b277-4cc1-8172-df1d3b8ff141",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e694df90-e540-448f-9313-be8c7027c108",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "alessia99"
+    }, {
+      "id": "0787303e-b674-4620-bdea-c5f16d1b93c4",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6e57f5ec-5465-46d9-ac41-218d6ed981a9",
       "comment": "",
       "command": "click",
       "target": "css=a:nth-child(2)",
@@ -1195,7 +1615,7 @@
       ],
       "value": ""
     }, {
-      "id": "d5673adf-b424-4f94-b614-dcfff058c228",
+      "id": "06dc28ac-802d-495a-a846-294f14640899",
       "comment": "",
       "command": "click",
       "target": "css=tr:nth-child(1) .fa-pen",
@@ -1206,55 +1626,31 @@
       ],
       "value": ""
     }, {
-      "id": "9c357f95-b58e-445a-a106-d5ca1545f66e",
+      "id": "b6acd88b-0ba7-47d3-94fa-3a05e30ecf4d",
       "comment": "",
       "command": "click",
-      "target": "name=immagine",
+      "target": "name=descrizione",
       "targets": [
-        ["name=immagine", "name"],
-        ["css=.single_input:nth-child(4) > input", "css:finder"],
-        ["xpath=//input[@name='immagine']", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
+        ["name=descrizione", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='descrizione']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "d6837a0a-d2a4-4261-9bdb-b1e684a9ccf9",
+      "id": "c41497b5-6096-441f-871a-be6548a6fa7d",
       "comment": "",
       "command": "type",
-      "target": "name=immagine",
+      "target": "name=descrizione",
       "targets": [
-        ["name=immagine", "name"],
-        ["css=.single_input:nth-child(4) > input", "css:finder"],
-        ["xpath=//input[@name='immagine']", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
+        ["name=descrizione", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='descrizione']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
       ],
-      "value": "margheriita.png"
+      "value": "monoporzione deliziosa"
     }, {
-      "id": "eb918389-43d2-4f4c-85a5-13def00adb17",
-      "comment": "",
-      "command": "click",
-      "target": "name=nome",
-      "targets": [
-        ["name=nome", "name"],
-        ["css=.single_input:nth-child(2) > input", "css:finder"],
-        ["xpath=//input[@name='nome']", "xpath:attributes"],
-        ["xpath=//div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "0e1ce040-9592-4885-b10d-483faa76f162",
-      "comment": "",
-      "command": "type",
-      "target": "name=nome",
-      "targets": [
-        ["name=nome", "name"],
-        ["css=.single_input:nth-child(2) > input", "css:finder"],
-        ["xpath=//input[@name='nome']", "xpath:attributes"],
-        ["xpath=//div/input", "xpath:position"]
-      ],
-      "value": "Gnocchi "
-    }, {
-      "id": "020cdb05-88de-43d1-a2e0-3c5a3cd0afc3",
+      "id": "e9b38815-5f57-4016-aa12-3fb6c61541f3",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -1262,6 +1658,17 @@
         ["css=button", "css:finder"],
         ["xpath=//button[@type='submit']", "xpath:attributes"],
         ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cca24a45-99df-4a18-88be-6c265502973f",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "css=th:nth-child(1)",
+      "targets": [
+        ["css=th:nth-child(1)", "css:finder"],
+        ["xpath=//th", "xpath:position"],
+        ["xpath=//th[contains(.,'Nome Prodotto')]", "xpath:innerText"]
       ],
       "value": ""
     }]
@@ -1269,21 +1676,69 @@
     "id": "0683bfd0-a224-4849-b997-06954eb88c51",
     "name": "CercaCodice_MailVuota",
     "commands": [{
-      "id": "064da1fd-7d7a-4e3f-b2ec-c70f039ebb3c",
+      "id": "e09b2642-7e71-429b-b8cf-1fce2cbc28ab",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/sala/cercaCodice.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "1747a28f-d9d9-4f6d-8706-29854fc792d2",
+      "id": "d8b9bbc5-cfe4-478c-a1da-5457f1f8ac57",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "45a7bed0-08c8-472e-b62c-b5fbf393fab5",
+      "id": "9172f416-9180-43e6-be59-a960d35057fe",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "50e2b7d5-0ee5-4ab9-8acc-ea6c8c182ee4",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "benitozzisimone@gmail.it"
+    }, {
+      "id": "4a435aac-37d6-4bfd-a4ad-25e1984ca66d",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "befbc14d-7753-4e4e-bed5-3d054062058e",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "simone99"
+    }, {
+      "id": "44adccb3-3104-4143-ab9a-561c83c5fbf8",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -1294,7 +1749,30 @@
       ],
       "value": ""
     }, {
-      "id": "f7e7542d-67d1-4c95-9455-e5dff8d95d4b",
+      "id": "d0802776-1a6b-4904-957d-7bc80643042a",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2)",
+      "targets": [
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Cerca Cliente')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../sala/cercaCodice.jsp')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1ff55e3b-78e8-417f-90cc-d829eb54074e",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2271ac2f-1f78-4970-b08c-4e0a174df74a",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkEmail",
@@ -1311,45 +1789,69 @@
     "id": "85607366-d360-4751-bd68-33238c5790a3",
     "name": "CercaCodice_MailCorta",
     "commands": [{
-      "id": "4c9dbf64-e8ee-4312-ad93-9a028259fb0b",
+      "id": "8967d90c-6ba4-46e9-8c3a-3b5a9142e3c2",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/sala/cercaCodice.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "012e1750-4b42-4c3e-86ca-8355e9ff78ad",
+      "id": "b0879d1b-de1a-46a0-8037-1dc48272d873",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "d2165a6d-e185-4355-825b-ab17794c1397",
+      "id": "32f9f3d9-5b5c-4712-bb16-8e1f37888d08",
       "comment": "",
       "command": "click",
       "target": "name=email",
       "targets": [
         ["name=email", "name"],
-        ["css=input", "css:finder"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
         ["xpath=//input[@name='email']", "xpath:attributes"],
         ["xpath=//input", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "6bcdd562-7858-4648-83d5-8c4393954a70",
+      "id": "b8a96112-997f-429a-bbb6-bb9a1789b6d0",
       "comment": "",
       "command": "type",
       "target": "name=email",
       "targets": [
         ["name=email", "name"],
-        ["css=input", "css:finder"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
         ["xpath=//input[@name='email']", "xpath:attributes"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "a"
+      "value": "benitozzisimone@gmail.it"
     }, {
-      "id": "9d6b3afb-02aa-484e-b306-1fd86dfa20e3",
+      "id": "5655e782-9a0c-4adb-8651-40ed72e0467d",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "339026b4-8a13-4b85-b078-59c4c7aefd43",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "simone99"
+    }, {
+      "id": "ea480a78-08a3-4c02-a8e0-ac332872e40f",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -1360,7 +1862,31 @@
       ],
       "value": ""
     }, {
-      "id": "be494fbf-ab04-4a72-96de-9be006b05c77",
+      "id": "2b355228-7bfa-45b2-8c9a-330d0a67329e",
+      "comment": "",
+      "command": "click",
+      "target": "css=a:nth-child(2)",
+      "targets": [
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Cerca Cliente')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../sala/cercaCodice.jsp')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9faea320-dc2f-4c22-b50e-71ee86510cfc",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "26f405e0-571d-4ea9-8b7c-c186789f92e3",
       "comment": "",
       "command": "type",
       "target": "name=email",
@@ -1370,9 +1896,9 @@
         ["xpath=//input[@name='email']", "xpath:attributes"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "a.@a"
+      "value": "a@a"
     }, {
-      "id": "3cdf8435-0b88-45ad-b4c1-f53edbb518fe",
+      "id": "852f43d3-fe8e-4dd7-b009-fd9d3dbb2fa6",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -1383,7 +1909,7 @@
       ],
       "value": ""
     }, {
-      "id": "4163746f-32d9-431c-8baf-353b6e442fa0",
+      "id": "3748ad6b-4918-481f-8150-519dbe4a5373",
       "comment": "",
       "command": "assertElementPresent",
       "target": "id=checkEmail",
@@ -1398,47 +1924,71 @@
     }]
   }, {
     "id": "25f589df-2691-483c-bc9d-6f3554e94c8a",
-    "name": "CercaCodice_EsitoCorretto",
+    "name": "CercaCodice_MancataCorrispondenza",
     "commands": [{
-      "id": "5f0e88a0-ba34-4f12-a2bf-c1be7da5924a",
+      "id": "d1d416e3-ba86-45af-b58e-6c63109f202e",
       "comment": "",
       "command": "open",
-      "target": "http://localhost/RistoManager/sala/cercaCodice.jsp",
+      "target": "http://localhost/RistoManager/login.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "019f31cd-b6db-4f0e-9511-9092780fd0c0",
+      "id": "0dd855dc-9e73-4b3a-bc37-f28897b29cf4",
       "comment": "",
       "command": "setWindowSize",
       "target": "1382x744",
       "targets": [],
       "value": ""
     }, {
-      "id": "9c5c962b-b00a-46dd-893a-ae0deb9358ce",
+      "id": "b44eec62-f6d0-4fe5-96eb-043a60b80b23",
       "comment": "",
       "command": "click",
       "target": "name=email",
       "targets": [
         ["name=email", "name"],
-        ["css=input", "css:finder"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
         ["xpath=//input[@name='email']", "xpath:attributes"],
         ["xpath=//input", "xpath:position"]
       ],
       "value": ""
     }, {
-      "id": "6b7091a2-cbd7-4d23-9af2-52f661c29871",
+      "id": "d741b1ee-d14f-4441-aac2-e41a6e4d4a4a",
       "comment": "",
       "command": "type",
       "target": "name=email",
       "targets": [
         ["name=email", "name"],
-        ["css=input", "css:finder"],
+        ["css=.single_login_input:nth-child(1) > input", "css:finder"],
         ["xpath=//input[@name='email']", "xpath:attributes"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "costantemarco99@Gmail.com"
+      "value": "benitozzisimone@gmail.it"
     }, {
-      "id": "50e2fdcf-d634-4d2d-a41a-3511fbda2e32",
+      "id": "104a7ad7-0cd4-403d-ada8-95eaa4db4c0f",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d173446a-d14e-47d0-a801-eab39dd0a49d",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.single_login_input:nth-child(3) > input", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "simone99"
+    }, {
+      "id": "951bdd74-c878-4d6a-a8a2-6a7eaba9b67e",
       "comment": "",
       "command": "click",
       "target": "css=button",
@@ -1449,16 +1999,65 @@
       ],
       "value": ""
     }, {
-      "id": "bd28fc8c-28b3-4078-bd25-ea4dccb2688d",
+      "id": "c53db9b3-99f4-44b2-aca0-65f6a61c0c60",
       "comment": "",
-      "command": "assertElementPresent",
-      "target": "css=tr:nth-child(1) > td:nth-child(1)",
+      "command": "click",
+      "target": "css=a:nth-child(2)",
       "targets": [
-        ["css=tr:nth-child(1) > td:nth-child(1)", "css:finder"],
-        ["xpath=//td", "xpath:position"],
-        ["xpath=//td[contains(.,'MARCO')]", "xpath:innerText"]
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Cerca Cliente')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../sala/cercaCodice.jsp')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "414035e3-19cf-4cbd-a22d-0b17e1fe7460",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8bac3ae1-7d5c-4068-8414-67962a41543b",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=input", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "p.melotti@e.it"
+    }, {
+      "id": "4f180f8c-2710-4e63-8532-f6f675c8987d",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "71dbc295-6a07-4a21-9397-8161e426e385",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=checkEmail",
+      "targets": [
+        ["id=checkEmail", "id"],
+        ["css=#checkEmail", "css:finder"],
+        ["xpath=//span[@id='checkEmail']", "xpath:attributes"],
+        ["xpath=//form/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Non è stata trovata una corrispondenza')]", "xpath:innerText"]
+      ],
+      "value": "Non è stata trovata una corrispondenza"
     }]
   }, {
     "id": "5e21a063-30f3-4e3d-84c4-09abf7059fad",
