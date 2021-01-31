@@ -3116,7 +3116,7 @@
       "id": "ddfb591a-2b9f-4ebf-bd81-a061c8ebb5bb",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "id=checkCelluulare",
+      "target": "id=checkCellulare",
       "targets": [
         ["id=checkCelluulare", "id"],
         ["css=#checkCelluulare", "css:finder"],
@@ -3302,7 +3302,7 @@
       "id": "97be4a9c-702b-4d5d-b4b2-58c5bea6af40",
       "comment": "",
       "command": "assertElementPresent",
-      "target": "id=checkCelluulare",
+      "target": "id=checkCellulare",
       "targets": [
         ["id=checkCelluulare", "id"],
         ["css=#checkCelluulare", "css:finder"],
@@ -3774,209 +3774,6 @@
         ["xpath=//span[contains(.,'Il campo non rispetta la lunghezza minima')]", "xpath:innerText"]
       ],
       "value": "Il campo non rispetta la lunghezza minima"
-    }]
-  }, {
-    "id": "d73025eb-be3e-4a31-98ca-b181eb066254",
-    "name": "Registrazione_EsitoCorretto",
-    "commands": [{
-      "id": "ad36efaf-a3a9-473c-8be5-0be7b691a3cd",
-      "comment": "",
-      "command": "open",
-      "target": "http://localhost/RistoManager/registrazione.jsp",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "f3861075-3938-4579-9b95-e6acf26e1d21",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "516x605",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "e370d3a3-a656-483f-9d25-6442c7544141",
-      "comment": "",
-      "command": "click",
-      "target": "css=form",
-      "targets": [
-        ["css=form", "css:finder"],
-        ["xpath=//form[@action='./registrazione']", "xpath:attributes"],
-        ["xpath=//form", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "00f68e4b-55c6-49e2-8d68-e9d94132a355",
-      "comment": "",
-      "command": "click",
-      "target": "name=nome",
-      "targets": [
-        ["name=nome", "name"],
-        ["css=.single_field:nth-child(1) > input", "css:finder"],
-        ["xpath=//input[@name='nome']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "badd70b3-befd-433c-9bb9-d8cae5f9d486",
-      "comment": "",
-      "command": "type",
-      "target": "name=nome",
-      "targets": [
-        ["name=nome", "name"],
-        ["css=.single_field:nth-child(1) > input", "css:finder"],
-        ["xpath=//input[@name='nome']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "MARCO"
-    }, {
-      "id": "c4de1f67-5397-4215-9669-7f202f1b6c0e",
-      "comment": "",
-      "command": "type",
-      "target": "name=cognome",
-      "targets": [
-        ["name=cognome", "name"],
-        ["css=.single_field:nth-child(3) > input", "css:finder"],
-        ["xpath=//input[@name='cognome']", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": "COSTANTE"
-    }, {
-      "id": "b032b624-a813-4b2f-9c17-dc1c22dd8ddd",
-      "comment": "",
-      "command": "type",
-      "target": "name=email",
-      "targets": [
-        ["name=email", "name"],
-        ["css=.single_field:nth-child(9) > input", "css:finder"],
-        ["xpath=//input[@name='email']", "xpath:attributes"],
-        ["xpath=//div[5]/input", "xpath:position"]
-      ],
-      "value": "costantemarco99@Gmail.com"
-    }, {
-      "id": "d86a9466-e3bf-495c-8b6b-105d48e64f51",
-      "comment": "",
-      "command": "click",
-      "target": "name=documento",
-      "targets": [
-        ["name=documento", "name"],
-        ["css=.single_field:nth-child(5) > input", "css:finder"],
-        ["xpath=//input[@name='documento']", "xpath:attributes"],
-        ["xpath=//div[3]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "1e2669fa-ed35-447f-b66b-aafd6aa427a3",
-      "comment": "",
-      "command": "type",
-      "target": "name=documento",
-      "targets": [
-        ["name=documento", "name"],
-        ["css=.single_field:nth-child(5) > input", "css:finder"],
-        ["xpath=//input[@name='documento']", "xpath:attributes"],
-        ["xpath=//div[3]/input", "xpath:position"]
-      ],
-      "value": "ab123cd"
-    }, {
-      "id": "813b7a0c-4a95-4998-bf78-6c3585957270",
-      "comment": "",
-      "command": "click",
-      "target": "name=cellulare",
-      "targets": [
-        ["name=cellulare", "name"],
-        ["css=.single_field:nth-child(7) > input", "css:finder"],
-        ["xpath=//input[@name='cellulare']", "xpath:attributes"],
-        ["xpath=//div[4]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "8222f218-f356-4a1f-b6fc-f3b854dac055",
-      "comment": "",
-      "command": "type",
-      "target": "name=cellulare",
-      "targets": [
-        ["name=cellulare", "name"],
-        ["css=.single_field:nth-child(7) > input", "css:finder"],
-        ["xpath=//input[@name='cellulare']", "xpath:attributes"],
-        ["xpath=//div[4]/input", "xpath:position"]
-      ],
-      "value": "1234567891"
-    }, {
-      "id": "55100998-65c8-4fbd-ad57-96ee2ee7bb14",
-      "comment": "",
-      "command": "type",
-      "target": "name=numPosti",
-      "targets": [
-        ["name=numPosti", "name"],
-        ["css=.single_field:nth-child(11) > input", "css:finder"],
-        ["xpath=//input[@name='numPosti']", "xpath:attributes"],
-        ["xpath=//div[6]/input", "xpath:position"]
-      ],
-      "value": "1"
-    }, {
-      "id": "fa850fe0-50e6-419f-a579-8f4ca966cd8a",
-      "comment": "",
-      "command": "click",
-      "target": "name=numPosti",
-      "targets": [
-        ["name=numPosti", "name"],
-        ["css=.single_field:nth-child(11) > input", "css:finder"],
-        ["xpath=//input[@name='numPosti']", "xpath:attributes"],
-        ["xpath=//div[6]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "a111c18c-c725-4c20-bb68-eccbade90dcf",
-      "comment": "",
-      "command": "mouseDown",
-      "target": "css=.checkbox",
-      "targets": [
-        ["css=.checkbox", "css:finder"],
-        ["xpath=//div[7]/label", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "62740c46-61ad-4add-981d-f0d5140285e0",
-      "comment": "",
-      "command": "mouseUp",
-      "target": "css=input:nth-child(1)",
-      "targets": [
-        ["css=input:nth-child(1)", "css:finder"],
-        ["xpath=//input[@type='checkbox']", "xpath:attributes"],
-        ["xpath=//label/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "c5321f25-75ef-491a-b587-a78e54c271c5",
-      "comment": "",
-      "command": "click",
-      "target": "css=.checkbox",
-      "targets": [
-        ["css=.checkbox", "css:finder"],
-        ["xpath=//div[7]/label", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "00bbba5c-b19a-41df-89cc-625a13bd4488",
-      "comment": "",
-      "command": "click",
-      "target": "css=button",
-      "targets": [
-        ["css=button", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"],
-        ["xpath=//button[contains(.,'REGISTRA')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "90bb8108-9af4-43be-824f-8f12a72b873b",
-      "comment": "",
-      "command": "assertElementPresent",
-      "target": "css=.main_container .fa-receipt",
-      "targets": [
-        ["css=.main_container .fa-receipt", "css:finder"],
-        ["xpath=//i[@onclick='goToComanda()']", "xpath:attributes"],
-        ["xpath=//i[2]", "xpath:position"]
-      ],
-      "value": ""
     }]
   }, {
     "id": "56bf2f14-e9cf-4738-bf41-5b7a77cb0885",
