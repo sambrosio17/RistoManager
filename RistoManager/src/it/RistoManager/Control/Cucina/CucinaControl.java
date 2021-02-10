@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.RistoManager.DAO.ComandaDAO;
-import it.RistoManager.Model.ComandaBean;
+import it.RistoManager.Model.DAO.ComandaDAO;
+import it.RistoManager.Model.Enity.ComandaBean;
 
 /**
  * Servlet implementation class GestioneCucina
