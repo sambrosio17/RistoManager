@@ -1,6 +1,7 @@
 package it.RistoManager.Control.Comanda;
 
 import java.io.IOException;
+import weka.*;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.RistoManager.DAO.ProdottoDAO;
-import it.RistoManager.Model.ClienteBean;
-import it.RistoManager.Model.ComandaBean;
-import it.RistoManager.Model.ComandaItemBean;
-import it.RistoManager.Model.ProdottoBean;
+import it.RistoManager.Model.DAO.ProdottoDAO;
+import it.RistoManager.Model.Enity.ClienteBean;
+import it.RistoManager.Model.Enity.ComandaBean;
+import it.RistoManager.Model.Enity.ComandaItemBean;
+import it.RistoManager.Model.Enity.ProdottoBean;
 
 /**
  * Servlet implementation class AggiungiProdottoComanda
