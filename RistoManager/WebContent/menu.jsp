@@ -1,6 +1,6 @@
-<%@page import="it.RistoManager.Model.ProdottoBean"%>
+<%@page import="it.RistoManager.Model.Enity.ProdottoBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="it.RistoManager.Model.ClienteBean"%>
+<%@page import="it.RistoManager.Model.Enity.ClienteBean"%>
 <%
 	String category= (String) request.getAttribute("category");
 	ClienteBean c= (ClienteBean) request.getSession().getAttribute("cliente");
