@@ -24,60 +24,74 @@ public class KMeansExecutor {
 	public static final int NUM_CLUSTERS = 5;
 
 	// Dataset
-//	private static final String fileName = "./Datasets/menuFinale.arff";
 	public static final String fileName = "C:\\Users\\simon\\Desktop\\UNISA\\2° Anno\\2° Semestre\\TSW\\Workspaces\\Workspace Progetto\\RistoManager\\Datasets\\menuFinale.arff";
+
 	// Istanze contenenti solo i dati numerici
-	private Instances data;
+	private static Instances data;
 	// Istanze contenenti anche il nome
-	private Instances items;
+	private static Instances items;
 
-	private ProdottoDAO dao;
+	private static ProdottoDAO dao;
+	// Lista di Prodotti
+	private static ArrayList<ProdottoBean> prodotti;
 
 	// Associa ad ogni riga del dataset il numero del cluster
-	int[] assignments;
+	private static int[] assignments;
 	// Associa ad ogni riga del dataset il numero del cluster
-	int[] associations;
+	private static int[] associations;
 
-	public KMeansExecutor() throws Exception {
-		// Istanze del dataset con i valori discreti
-		BufferedReader datafile = readDataFile(fileName);
-		items = new Instances(datafile);
+	
+	static {
+		try {
+			// Istanze del dataset con i valori discreti
+			BufferedReader datafile = readDataFile(fileName);
+			items = new Instances(datafile);
 
-		// Scelta dell'attributo da rimuovere (0 = categoria; 1 = nome del prodotto; numAttributes - 1 = prezzo)
-		int[] attributes = new int[3];
-		attributes[0] = 0;
-		attributes[1] = 1; 
-		attributes[2] = items.numAttributes() - 1;
+			// Scelta dell'attributo da rimuovere (0 = categoria; 1 = nome del prodotto;
+			// numAttributes - 1 = prezzo)
+			int[] attributes = new int[3];
+			attributes[0] = 0;
+			attributes[1] = 1;
+			attributes[2] = items.numAttributes() - 1;
 
-		// Crea un nuovo set di istanze senza l'attributo nome
-		Remove remove = new Remove();
-		remove.setAttributeIndicesArray(attributes);
-		remove.setInvertSelection(false);
-		remove.setInputFormat(items);
-		data = Filter.useFilter(items, remove);
+			// Crea un nuovo set di istanze senza l'attributo nome
+			Remove remove = new Remove();
+			remove.setAttributeIndicesArray(attributes);
+			remove.setInvertSelection(false);
+			remove.setInputFormat(items);
+			data = Filter.useFilter(items, remove);
 
-		Standardize standardize = new Standardize();
-		standardize.setInputFormat(data);
-		data = Filter.useFilter(data, standardize);
-		
-		dao = new ProdottoDAO();
-		associations = new int[items.numInstances()];
+			Standardize standardize = new Standardize();
+			standardize.setInputFormat(data);
+			data = Filter.useFilter(data, standardize);
 
-		getAllProdotti();
+			prodotti = new ArrayList<ProdottoBean>();
+			dao = new ProdottoDAO();
+			associations = new int[items.numInstances()];
+
+			getAllProdotti();
+			
+			createClusters();
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 	}
 
-	public int[] createClusters() throws Exception {
+	private KMeansExecutor() {
+		
+	}
+	
+	public static int[] createClusters() throws Exception {
 
 		EuclideanDistance distance = new EuclideanDistance();
 		distance.setDontNormalize(true);
-		
+
 		SimpleKMeans kmeans = new SimpleKMeans();
 		kmeans.setDistanceFunction(distance);
 		kmeans.setSeed(SEED);
 		kmeans.setPreserveInstancesOrder(true);
 		kmeans.setNumClusters(NUM_CLUSTERS);
 
-		
 		kmeans.buildClusterer(data);
 
 		// Associa ad ogni prodotto il numero del cluster
@@ -86,7 +100,7 @@ public class KMeansExecutor {
 		return assignments;
 	}
 
-	public ProdottoBean getProdottoByLine(int line) {
+	public static ProdottoBean getProdottoByLine(int line) {
 		if (line >= items.numInstances() || line < 0)
 			return null;
 
@@ -114,7 +128,7 @@ public class KMeansExecutor {
 		}
 	}
 
-	public ProdottoBean getProdottoById(int id) {
+	public static ProdottoBean getProdottoById(int id) {
 //		getAssociations();
 
 		int n = associations.length;
@@ -123,41 +137,54 @@ public class KMeansExecutor {
 			if (associations[i] == id)
 				line = i;
 
-		return getProdottoByLine(line);
-	}
-
-	public ArrayList<ProdottoBean> getAllProdotti() {
-		ArrayList<ProdottoBean> prodotti = new ArrayList<ProdottoBean>();
-		int n = items.numInstances();
-		for (int i = 0; i < n; i++) {
-			ProdottoBean p = getProdottoByLine(i);
-			prodotti.add(p);
-		}
-
-		return prodotti;
+		return prodotti.get(line);
 	}
 	
-	public ArrayList<ProdottoBean> getProdottiByCategoria(String categoria) {
-		ArrayList<ProdottoBean> prodotti = new ArrayList<ProdottoBean>();
-		int n = items.numInstances();
+	public static int getLineById(int id) {
+		for(int line = 0; line < associations.length; line++)
+			if(id == associations[line])
+				return line;
 		
-		for (int i = 0; i < n; i++) {
-			//Seleziona solo quelli in cui la categoria coincide
-			if (items.instance(i).stringValue(0).equalsIgnoreCase(categoria)) {
+		return -1;
+	}
+
+	public static ArrayList<ProdottoBean> getAllProdotti() {
+		if (prodotti.size() == 0) {
+	
+			int n = items.numInstances();
+			for (int i = 0; i < n; i++) {
 				ProdottoBean p = getProdottoByLine(i);
 				prodotti.add(p);
 			}
-		}
 
+		}
 		return prodotti;
 	}
 
-	public ArrayList<ProdottoBean> getCluster(int clusterNumber) {
+	public static ArrayList<ProdottoBean> getProdottiByCategoria(String categoria) {
+		if (prodotti.size() == 0) {
+			getAllProdotti();
+		}
+		
+		ArrayList<ProdottoBean> prodottiCategoria = new ArrayList<ProdottoBean>();
+		int n = prodotti.size();
+
+		for (ProdottoBean p : prodotti) {
+			// Seleziona solo quelli in cui la categoria coincide
+			if (p.getCategoria().equalsIgnoreCase(categoria)) {
+				prodottiCategoria.add(p);
+			}
+		}
+
+		return prodottiCategoria;
+	}
+
+	public static ArrayList<ProdottoBean> getCluster(int clusterNumber) {
 		ArrayList<ProdottoBean> cluster = new ArrayList<ProdottoBean>();
 		int n = items.numInstances();
 		for (int i = 0; i < n; i++) {
 			if (assignments[i] == clusterNumber) {
-				ProdottoBean p = getProdottoByLine(i);
+				ProdottoBean p = prodotti.get(i);
 				cluster.add(p);
 			}
 		}
@@ -177,12 +204,17 @@ public class KMeansExecutor {
 		return inputReader;
 	}
 
-	public int[] getAssociations() {
+	public static int[] getAssociations() {
 		getAllProdotti();
 		return associations;
 	}
 
-	public ProdottoBean createProdotto(Instance itemInstance) throws SQLException {
+	public static int[] getAssignments() {
+		getAllProdotti();
+		return assignments;
+	}
+	
+	public static ProdottoBean createProdotto(Instance itemInstance) throws SQLException {
 		// Salva in p le informazioni tracciate dal database e chiama create
 		ProdottoBean p = new ProdottoBean();
 
@@ -195,7 +227,7 @@ public class KMeansExecutor {
 		return updateProdotto(p, itemInstance);
 	}
 
-	public ProdottoBean updateProdotto(ProdottoBean p, Instance itemInstance) {
+	public static ProdottoBean updateProdotto(ProdottoBean p, Instance itemInstance) {
 		// Salva in p le informazioni contenute solo nel dataset
 		int[] valori = new int[15];
 		for (int i = 0; i <= 14; i++)

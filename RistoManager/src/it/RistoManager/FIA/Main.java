@@ -10,11 +10,10 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 //		Long start = System.currentTimeMillis();
-		KMeansExecutor k = new KMeansExecutor();
-		int[] assignments = k.createClusters();
+		int[] assignments = KMeansExecutor.getAssignments();
 		
 		for(int i = 0; i < assignments.length; i++) {
-			System.out.println(k.getProdottoByLine(i).getCategoria() + " " + assignments[i] );
+			System.out.println(KMeansExecutor.getProdottoByLine(i).getCategoria() + " " + assignments[i] );
 		}
 		
 		/*		
@@ -27,9 +26,11 @@ public class Main {
 		List<ProdottoBean> list = k.getAllProdotti();
 		for(ProdottoBean p : list)
 			System.out.println(p);
-		System.out.println(System.currentTimeMillis() - start);
+		
 //		System.out.println(2);
 //		System.out.println(k.getProdottoById(319));
+		System.out.println(System.currentTimeMillis() - start);
+*
 */
 	}
 
