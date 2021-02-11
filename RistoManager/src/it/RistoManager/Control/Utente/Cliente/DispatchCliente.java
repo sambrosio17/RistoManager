@@ -1,9 +1,13 @@
 package it.RistoManager.Control.Utente.Cliente;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.RistoManager.FIA.KMeansExecutor;
 import it.RistoManager.Model.DAO.ClienteDAO;
+import it.RistoManager.Model.DAO.ComandaDAO;
 import it.RistoManager.Model.Enity.ClienteBean;
+import it.RistoManager.Model.Enity.ComandaBean;
+import it.RistoManager.Model.Enity.ComandaItemBean;
+import it.RistoManager.Model.Enity.ProdottoBean;
 
 /**
  * Servlet implementation class RegistrazioneClient
@@ -77,6 +86,33 @@ public class DispatchCliente extends HttpServlet {
 			// Caso prenotato
 			request.getSession().setAttribute("cliente", cliente);
 			request.setAttribute("errorTest", PRENOTATO);
+
+			ComandaDAO dao = new ComandaDAO();
+			List<ComandaBean> list = null;
+
+			try {
+				list = dao.retrieveByCodiceTavolo(cliente.getCodiceTavolo());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (list != null && list.size() > 0) {
+				for (ComandaBean comanda : list) {
+					List<ComandaItemBean> items = comanda.getProdotti();
+					for (ComandaItemBean ci : items) {
+						ProdottoBean p = ci.getProdotto();
+
+						// A partire dall'id, recupera l'indice del prodotto nel dataset
+						int line = KMeansExecutor.getLineById(p.getId());
+
+						// Recupera il cluster associato al prodotto
+						int cluster = KMeansExecutor.getAssignments()[line];
+
+						cliente.updatePreferenze(20, cluster);
+					}
+				}
+			}
+
 			dispatcher = request.getRequestDispatcher("/menu");
 			dispatcher.forward(request, response);
 			return;
