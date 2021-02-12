@@ -18,10 +18,14 @@ function closeMenu(){
 
 }
 
+function goToRiepilogo(){
+	location.href="./riepilogo";
+}
 
 function goToComanda(){
 	location.href="./comanda";
 }
+
 async function showDetails(product){
 
 	const productDetails=document.querySelector(".product_details");
