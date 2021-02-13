@@ -60,6 +60,7 @@ public class KMeansEvaluator {
 
 		/////////////////////////////////////////////////////////////
 
+		// Associa ad ogni istanza il numero del cluster
 		int[] clusterIndexOfInstance = new int[data.numInstances()];
 		for (int i = 0; i < data.numInstances(); i++) {
 			clusterIndexOfInstance[i] = kmeans.clusterInstance(data.instance(i));
@@ -68,34 +69,29 @@ public class KMeansEvaluator {
 		double sumSilhouetteCoefficients = 0;
 		for (int i = 0; i < data.numInstances(); i++) {
 
-			// Compute average distance of current instance to each cluster, including its
-			// own cluster
+			//Calcola la distanza media ell'instanza corrente da ciascun cluster
 			double[] averageDistancePerCluster = new double[kmeans.numberOfClusters()];
 			int[] numberOfInstancesPerCluster = new int[kmeans.numberOfClusters()];
 			for (int j = 0; j < data.numInstances(); j++) {
 				averageDistancePerCluster[clusterIndexOfInstance[j]] += distance.distance(data.instance(i),
 						data.instance(j));
-				numberOfInstancesPerCluster[clusterIndexOfInstance[j]]++; // Should the current instance be skipped
-																			// though?
+				numberOfInstancesPerCluster[clusterIndexOfInstance[j]]++; 
 			}
 			for (int k = 0; k < averageDistancePerCluster.length; k++) {
 				averageDistancePerCluster[k] /= numberOfInstancesPerCluster[k];
 			}
 
-			// Average distance to instance's own cluster
+			// distanza media dal cluster dell'istanza
 			double a = averageDistancePerCluster[clusterIndexOfInstance[i]];
 
-			// Find the distance of the "closest" other cluster
+			// Distanza del cluster più vicino
 			averageDistancePerCluster[clusterIndexOfInstance[i]] = Double.MAX_VALUE;
 			double b = Arrays.stream(averageDistancePerCluster).min().getAsDouble();
 
-//		  System.out.println("Number of Clusters = "  +kmeans.numberOfClusters() +  "\na =" + a +  "\nb =" + b);
-			// Compute silhouette coefficient for current instance
-//		  System.out.println("INCREMENT = " + ((b - a) / Math.max(a, b)));
+			// Calcola il coefficiente di silhouette per l'istanza corrente
 			sumSilhouetteCoefficients += kmeans.numberOfClusters() > 1 ? (b - a) / Math.max(a, b) : 0;
 		}
 
-//		System.out.println("SUM = " + sumSilhouetteCoefficients + " INSTANCES = " + data.numInstances());
 		return sumSilhouetteCoefficients / data.numInstances();
 	}
 
