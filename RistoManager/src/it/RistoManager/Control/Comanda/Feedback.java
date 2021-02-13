@@ -23,12 +23,6 @@ import it.RistoManager.Model.Enity.ProdottoBean;
 @WebServlet("/feedback")
 public class Feedback extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	//Incremento di preferenza del cluster a cui appartiene il prodotto
-	private static final int increment = 20;
-	//Decremento di preferenza del cluster a cui appartiene il prodotto
-	private static final int decrement = -40;
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -52,10 +46,10 @@ public class Feedback extends HttpServlet {
 		
 		switch(action) {
 		case "up":
-			c.updatePreferenze(increment, cluster);
+			c.updatePreferenze(KMeansExecutor.increment, cluster);
 			break;
 		case "down":
-			c.updatePreferenze(decrement, cluster);
+			c.updatePreferenze(KMeansExecutor.increment * -2, cluster);
 			break;
 		}
 		for(int i=0; i< c.getPreferenze().length; i++)

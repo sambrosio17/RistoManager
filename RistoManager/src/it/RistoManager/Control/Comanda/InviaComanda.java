@@ -27,9 +27,6 @@ public class InviaComanda extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ComandaDAO cDao = new ComandaDAO();
 
-	// Incremento di preferenza dei cluster a cui appartiengono i prodotti scelti
-	private static final int increment = 20;
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -84,7 +81,7 @@ public class InviaComanda extends HttpServlet {
 				// Recupera il cluster associato al prodotto
 				int cluster = KMeansExecutor.getAssignments()[line];
 
-				cliente.updatePreferenze(increment, cluster);
+				cliente.updatePreferenze(KMeansExecutor.increment, cluster);
 			}
 			for(int i=0; i< cliente.getPreferenze().length; i++)
 				System.out.print(cliente.getPreferenze()[i] + " ");
