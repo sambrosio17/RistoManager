@@ -13,6 +13,7 @@ import weka.core.EuclideanDistance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.PrincipalComponents;
 import weka.filters.unsupervised.attribute.Remove;
 import weka.filters.unsupervised.attribute.Standardize;
 
@@ -20,8 +21,8 @@ public class KMeansExecutor {
 
 	// I valori di SEED e NUM_CLUSTERS sono stati scelti in base alle prove
 	// effettuate in KMeansEvaluator
-	private static final int SEED = 0;
-	public static final int NUM_CLUSTERS = 5;
+	private static final int SEED = 3;
+	public static final int NUM_CLUSTERS = 6;
 
 	// Dataset
 	public static final String fileName = "C:\\Users\\simon\\Desktop\\UNISA\\2° Anno\\2° Semestre\\TSW\\Workspaces\\Workspace Progetto\\RistoManager\\Datasets\\menuFinale.arff";
@@ -34,10 +35,12 @@ public class KMeansExecutor {
 	private static ProdottoDAO dao;
 	// Lista di Prodotti
 	private static ArrayList<ProdottoBean> prodotti;
-
+	//l'incremento della probabilità che i prodotti di un cluster possano essere consigliati ad un cliente
+	public final static int increment = (NUM_CLUSTERS - 1) * 5;
+	
 	// Associa ad ogni riga del dataset il numero del cluster
 	private static int[] assignments;
-	// Associa ad ogni riga del dataset il numero del cluster
+	// Associa ad ogni riga del dataset l'id del prodotto nel database
 	private static int[] associations;
 
 	
@@ -54,17 +57,24 @@ public class KMeansExecutor {
 			attributes[1] = 1;
 			attributes[2] = items.numAttributes() - 1;
 
-			// Crea un nuovo set di istanze senza l'attributo nome
+			// Filtro di rimozione degli attributi sopra indicati
 			Remove remove = new Remove();
 			remove.setAttributeIndicesArray(attributes);
 			remove.setInvertSelection(false);
 			remove.setInputFormat(items);
 			data = Filter.useFilter(items, remove);
 
+			//Filtro di standardizzazione dei dati
 			Standardize standardize = new Standardize();
 			standardize.setInputFormat(data);
 			data = Filter.useFilter(data, standardize);
 
+			// Filtro PCA (Gli attributi da 16 passano ad 8)
+			PrincipalComponents pca = new PrincipalComponents();
+			pca.setMaximumAttributeNames(5);
+			pca.setInputFormat(data);
+			data = Filter.useFilter(data, pca);
+			
 			prodotti = new ArrayList<ProdottoBean>();
 			dao = new ProdottoDAO();
 			associations = new int[items.numInstances()];

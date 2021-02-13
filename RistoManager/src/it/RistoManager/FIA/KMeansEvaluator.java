@@ -11,6 +11,7 @@ import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
 import weka.filters.unsupervised.attribute.Standardize;
 
+//Originale
 public class KMeansEvaluator {
 
 	private static Instances data;
@@ -36,11 +37,12 @@ public class KMeansEvaluator {
 
 		System.out.println("\nMAX = " + max + "; BEST CLUSTERS = " + bestNumClusters + "; BEST SEED = " + bestSeed);
 
-		// Ne risulta che la miglior scelta sia 5 per il numero di clusters e 0 per il
-		// seed, con un valore di 0.37204656498453376
+		// Risultato:
+		// MAX = 0.3733685131882255; BEST CLUSTERS = 6; BEST SEED = 3
 	}
 
-	//Calcola il valore di Silhouette eseguendo un KMeans, con numero di cluster e seed in input
+	// Calcola il valore di Silhouette eseguendo un KMeans, con numero di cluster e
+	// seed in input
 	public static double evaluate(int numClusters, int seed) throws Exception {
 
 		EuclideanDistance distance = new EuclideanDistance();
