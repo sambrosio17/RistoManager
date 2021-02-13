@@ -105,10 +105,13 @@ public class DispatchCliente extends HttpServlet {
 						// A partire dall'id, recupera l'indice del prodotto nel dataset
 						int line = KMeansExecutor.getLineById(p.getId());
 
+						System.out.println("id = " + p.getId());
 						// Recupera il cluster associato al prodotto
-						int cluster = KMeansExecutor.getAssignments()[line];
-
-						cliente.updatePreferenze(KMeansExecutor.increment, cluster);
+						int cluster = -1;
+						if(line  >= 0 && line < KMeansExecutor.getAssignments().length) {
+							cluster = KMeansExecutor.getAssignments()[line];
+							cliente.updatePreferenze(KMeansExecutor.increment, cluster);
+						}
 					}
 				}
 			}
