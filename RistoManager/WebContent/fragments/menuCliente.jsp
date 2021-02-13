@@ -16,7 +16,6 @@
 		<a href="./filter?category=breakfast"><li>Colazioni</li></a>
 		<a href="./filter?category=beef%20%26%20pork"><li>Beef & Pork</li></a>
 		<a href="./filter?category=chicken%20%26%20fish"><li>Chicken & Fish</li></a>
-		<a href="./filter?category=salads"><li>Insalate</li></a>
 		<a href="./filter?category=snacks%20%26%20sides"><li>Snack</li></a>
 		<a href="./filter?category=desserts"><li>Dolci</li></a>
 		<a href="./filter?category=beverages"><li>Bevande</li></a>
