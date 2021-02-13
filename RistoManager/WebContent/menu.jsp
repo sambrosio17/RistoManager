@@ -1,3 +1,4 @@
+<%@page import="it.RistoManager.FIA.KMeansExecutor"%>
 <%@page import="it.RistoManager.Model.Enity.ProdottoBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="it.RistoManager.Model.Enity.ClienteBean"%>
@@ -42,20 +43,27 @@
 			<%for(ProdottoBean p : prodotti) {%>
 			<div class="single_product">
 				<div class="sx">
-					<img
-						src="<%=p.getImmagine() %>" />
+					<img src="<%=p.getImmagine() %>" />
 				</div>
 				<div class="dx">
-					<h3 onclick="showDetails(<%=p.getId()%>)"><%=p.getNomeprodotto() %></h3>
+					<h3 onclick="showDetails(<%=p.getId()%>)"><%=p.getNomeprodotto() %>
+						
+						<%
+							int index = KMeansExecutor.getLineById(p.getId());
+								if (index >= 0 && index < KMeansExecutor.getAssignments().length) {
+						%>
+						[<%=KMeansExecutor.getAssignments()[KMeansExecutor.getLineById(p.getId())]%>]
+						<%
+							}
+						%>
+					</h3>
 					<p><%=p.getDescrizione() %></p>
 					<div class="mini_form">
 						<h3><%=p.getPrezzo() %>&euro;
 						</h3>
 						<form action="./addComanda" method="POST">
-							<label for="quantita">Quantita: </label>
-							<input type="number"
-								name="quantita" min=1 placeholder=1> 
-								<input type="text"
+							<label for="quantita">Quantita: </label> <input type="number"
+								name="quantita" min=1 placeholder=1> <input type="text"
 								value="<%=p.getId() %>" hidden name="productId">
 							<button type="submit">AGGIUNGI</button>
 						</form>

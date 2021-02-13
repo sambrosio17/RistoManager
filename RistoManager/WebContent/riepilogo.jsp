@@ -3,6 +3,7 @@
 <%@page import="it.RistoManager.Model.Enity.ComandaItemBean"%>
 <%@page import="java.util.List"%>
 <%@page import="it.RistoManager.Model.Enity.ClienteBean"%>
+<%@page import="it.RistoManager.FIA.KMeansExecutor"%>
 <%
 	ClienteBean c = (ClienteBean) request.getSession().getAttribute("cliente");
 	if (c == null) {
@@ -49,18 +50,30 @@
 					</div>
 					<div class="dx">
 						<div class="title_in_comanda">
-							<h3 onclick="showDetails(<%=p.getProdotto().getId()%>)"><%=p.getProdotto().getNomeprodotto()%></h3>
+							<h3 onclick="showDetails(<%=p.getProdotto().getId()%>)"><%=p.getProdotto().getNomeprodotto()%>
+								<%
+									int index = KMeansExecutor.getLineById(p.getProdotto().getId());
+												if (index >= 0 && index < KMeansExecutor.getAssignments().length) {
+								%>
+								[<%=KMeansExecutor.getAssignments()[KMeansExecutor
+									.getLineById(p.getProdotto().getId())]%>]
+								<%
+									}
+								%>
+							</h3>
 						</div>
 						<p><%=p.getProdotto().getDescrizione()%></p>
 						<div class="mini_form">
 							<h3>
 								<%=p.getQuantita()%>
-								pz. 
+								pz.
 								<%=p.getQuantita() * p.getProdotto().getPrezzo()%>&euro;
 							</h3>
 							<div>
-								<a href="./feedback?id=<%=p.getProdotto().getId()%>&action=up"><i class="far fa-thumbs-up fa-3x" ></i></a>
-								<a href="./feedback?id=<%=p.getProdotto().getId()%>&action=down"><i class="far fa-thumbs-down fa-3x"></i></a>
+								<a href="./feedback?id=<%=p.getProdotto().getId()%>&action=up"><i
+									class="far fa-thumbs-up fa-3x"></i></a> <a
+									href="./feedback?id=<%=p.getProdotto().getId()%>&action=down"><i
+									class="far fa-thumbs-down fa-3x"></i></a>
 							</div>
 						</div>
 					</div>
