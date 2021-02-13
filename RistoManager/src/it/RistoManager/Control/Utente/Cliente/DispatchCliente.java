@@ -108,7 +108,7 @@ public class DispatchCliente extends HttpServlet {
 						// Recupera il cluster associato al prodotto
 						int cluster = KMeansExecutor.getAssignments()[line];
 
-						cliente.updatePreferenze(20, cluster);
+						cliente.updatePreferenze(KMeansExecutor.increment, cluster);
 					}
 				}
 			}
