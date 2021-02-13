@@ -1,6 +1,6 @@
 @relation menu-weka.filters.unsupervised.attribute.Add-NSize-Clast-W1.0-weka.filters.unsupervised.attribute.Remove-R3-weka.filters.unsupervised.attribute.Add-NPrice-Clast-W1.0
 
-@attribute Category {Breakfast,'Beef & Pork','Chicken & Fish',Salads,'Snacks & Sides',Desserts,Beverages,'Coffee & Tea','Smoothies & Shakes'}
+@attribute Category {Breakfast,'Beef & Pork','Chicken & Fish','Snacks & Sides',Desserts,Beverages,'Coffee & Tea','Smoothies & Shakes'}
 @attribute Item string
 @attribute Calories numeric
 @attribute 'Calories from Fat' numeric
@@ -98,12 +98,6 @@ Breakfast,'Fruit & Maple Oatmeal without Brown Sugar',260,40,6,8,0,2,5,16,22,18,
 'Chicken & Fish','Chicken McNuggets (20 piece)',940,530,91,50,0,44,75,20,12,0,44,0,8,4,10,11.4,9.5
 'Chicken & Fish','Chicken McNuggets (40 piece)',1880,1060,182,101,1,89,150,39,24,1,87,0,15,8,25,22.8,19
 'Chicken & Fish',Filet-O-Fish,390,170,29,19,0,14,24,13,7,5,15,2,0,15,10,5,4.2
-Salads,'Premium Bacon Ranch Salad (without Chicken)',140,70,11,18,0,9,13,3,12,4,9,170,30,15,6,7.9,2.5
-Salads,'Premium Bacon Ranch Salad with Crispy Chicken',380,190,33,29,0,23,36,7,10,5,25,100,25,15,8,9,2.8
-Salads,'Premium Bacon Ranch Salad with Grilled Chicken',220,80,13,20,0,29,29,3,10,4,29,110,30,15,8,8.5,2.6
-Salads,'Premium Southwest Salad (without Chicken)',140,40,7,9,0,3,6,7,23,6,6,160,25,15,10,8.1,2.5
-Salads,'Premium Southwest Salad with Crispy Chicken',450,190,33,22,0,17,35,14,28,12,23,170,30,15,15,12.3,3.6
-Salads,'Premium Southwest Salad with Grilled Chicken',290,80,13,13,0,23,28,9,28,10,27,170,30,15,15,11.8,3.5
 'Snacks & Sides','Chipotle BBQ Snack Wrap (Crispy Chicken)',340,130,23,22,0,11,33,12,6,8,14,4,0,10,10,4.6,3.1
 'Snacks & Sides','Chipotle BBQ Snack Wrap (Grilled Chicken)',260,70,13,18,0,14,29,10,6,7,16,4,2,10,10,4.3,2.9
 'Snacks & Sides','Honey Mustard Snack Wrap (Crispy Chicken)',330,130,23,22,0,11,30,11,5,3,14,2,0,10,10,4.3,2.9
